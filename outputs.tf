@@ -29,7 +29,3 @@ output "rt_public_id" {
 output "rt_private_id" {
   value = "${aws_route_table.rt_private.id}"
 }
-
-output "public_key_id" {
-  value = "${aws_key_pair.key-pair.id}"
-}
