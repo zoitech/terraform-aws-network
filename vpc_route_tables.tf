@@ -1,7 +1,7 @@
 # Routes #
 resource "aws_route_table" "rt_public" {
     vpc_id = "${aws_vpc.main.id}"
-    
+
     tags {
         Name = "Public Route"
     }
@@ -9,19 +9,21 @@ resource "aws_route_table" "rt_public" {
 
 resource "aws_route_table" "rt_private" {
     vpc_id = "${aws_vpc.main.id}"
-    
+
     tags {
         Name = "Private Route"
     }
 }
 
 resource "aws_route" "rt_public_default" {
+  count = "${var.priv_nat}"
   route_table_id         = "${aws_route_table.rt_public.id}"
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = "${aws_internet_gateway.igw.id}"
 }
 
 resource "aws_route" "rt_private_default" {
+  count = "${var.priv_nat}"
   route_table_id         = "${aws_route_table.rt_private.id}"
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = "${aws_nat_gateway.natgw.id}"

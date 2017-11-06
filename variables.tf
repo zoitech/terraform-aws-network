@@ -33,3 +33,8 @@ variable "sn_private_b_name" {
   description = "The name of the 1st Private Subnet which will be available in AZ-b."
   default     = "Private B"
 }
+
+variable "priv_nat" {
+  description = "Create NAT GW for private subnet, create Internet GW for public subnet if set to true"
+  default = true
+}
