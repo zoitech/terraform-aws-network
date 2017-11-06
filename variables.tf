@@ -34,7 +34,7 @@ variable "sn_private_b_name" {
   default     = "Private B"
 }
 
-variable "priv_nat" {
+variable "create_nat" {
   description = "Create NAT GW for private subnet, create Internet GW for public subnet if set to true"
-  default = true
+  default     = true
 }
