@@ -24,8 +24,14 @@ output "sn_private_b_id" {
 
 output "rt_public_id" {
   value = "${aws_route_table.rt_public.id}"
+  description = "The ID of the 1st public Subnet."
 }
 
 output "rt_private_id" {
   value = "${aws_route_table.rt_private.id}"
+  description = "The ID of the 2nd public Subnet."
+}
+output "nat_ip" {
+  value = "${aws_nat_gateway.natgw.public_ip}"
+  description = "The IP of the NAT Gateway."
 }
