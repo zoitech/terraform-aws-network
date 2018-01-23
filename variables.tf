@@ -38,3 +38,8 @@ variable "create_nat" {
   description = "Create NAT GW for private subnet, create Internet GW for public subnet if set to true"
   default     = true
 }
+
+variable "dns_hostnames" {
+  description = "Enable DNS hostnames in the VPC"
+  default     = false
+}
