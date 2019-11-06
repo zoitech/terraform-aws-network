@@ -131,11 +131,10 @@ module "network" {
 ```
 
 For the transit gateway attachment to be successful:
-#!#!#!#!
-1. The transit gateway resource needs to be shared in the resource access manager of the network account to the account ID of the sandbox/project account being configured
-2. The terraform code for the sandbox/project account referencing the terraform.module.network module needs to be applied.
-3. The request to attach the transit gateway to the VPC in the sandbox/project account needs to be accepted within the trumpf network account.
-#!#!#!#!
+
+1. The transit gateway resource needs to be shared in the resource access manager to the account ID of the "child" account.
+2. The terraform code for the child account referencing this module needs to be applied.
+3. The request to attach the transit gateway to the VPC in the "child" account needs to be accepted within the account where the transit gateway exists.
 
 ### To Reference A Tagged Version of the Repository
 
