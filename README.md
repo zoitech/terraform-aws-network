@@ -15,6 +15,7 @@ This module creates the following resources:
 * Internet Gateway (Optional)
 * NAT Gateway (Optional) (Dependent on Internet Gateway)
 * Elastic IP for NAT Gateway (Optional)
+* Network ACL (Optional)
 * Transit Gateway attachment to the VPC (Optional)
 
 ## Usage
