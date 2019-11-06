@@ -52,6 +52,6 @@ output "rt_private_id" {
   description = "The ID of the private route table."
 }
 output "nat_ip" {
-  value       = var.create_nat == true ? aws_nat_gateway.natgw.*.public_ip : ""
+  value       = var.create_nat == true ? aws_nat_gateway.natgw[0].public_ip : ""
   description = "The IP of the NAT Gateway."
 }
