@@ -1,5 +1,5 @@
 output "vpc_id" {
-  value = aws_vpc.vpc.id
+  value = aws_vpc.main.id
 }
 
 output "sn_public_a_id" {

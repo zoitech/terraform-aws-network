@@ -13,6 +13,6 @@ resource "aws_vpc_dhcp_options" "dhcp_options" {
 
 resource "aws_vpc_dhcp_options_association" "dhcp_options" {
   count           = local.create_dhcp
-  vpc_id          = aws_vpc.vpc.id
+  vpc_id          = aws_vpc.main.id
   dhcp_options_id = aws_vpc_dhcp_options.dhcp_options[count.index].id
 }

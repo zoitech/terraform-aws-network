@@ -1,6 +1,6 @@
 # route tables
 resource "aws_route_table" "rt_public" {
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.main.id
 
   tags = {
     Name = "Public Route"
@@ -8,7 +8,7 @@ resource "aws_route_table" "rt_public" {
 }
 
 resource "aws_route_table" "rt_private" {
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.main.id
 
   tags = {
     Name = "Private Route"

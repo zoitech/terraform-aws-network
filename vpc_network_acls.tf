@@ -1,6 +1,6 @@
 resource "aws_network_acl" "vpc_acl" {
   count      = local.create_network_acl
-  vpc_id     = aws_vpc.vpc.id
+  vpc_id     = aws_vpc.main.id
   subnet_ids = [aws_subnet.sn_private_a.id, aws_subnet.sn_private_b.id, aws_subnet.sn_private_c.id, aws_subnet.sn_public_a.id, aws_subnet.sn_public_b.id, aws_subnet.sn_public_c.id, ]
 
   tags = {

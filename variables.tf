@@ -11,7 +11,7 @@ variable "vpc_name" {
   default     = "my-vpc"
 }
 
-variable "vpc_cidr_block" {
+variable "vpc_network" {
   default     = "10.0.0.0/24"
   description = "Network within which the Subnets will be created."
 }
