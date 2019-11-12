@@ -142,7 +142,7 @@ To reference a tagged version of the repository:
 
 ```hcl
 module "network" {
-  source      = "git::https://github.com/zoitech/terraform-aws-network.git?ref=1.0.1"
+  source      = "git::https://github.com/zoitech/terraform-aws-network.git?ref=1.0.2"
   vpc_name    = "my_vpc"
   vpc_network = "10.161.32.0/21"
   region      = "eu-central-1"
