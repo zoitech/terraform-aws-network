@@ -133,8 +133,9 @@ module "network" {
 For the transit gateway attachment to be successful:
 
 1. The transit gateway resource needs to be shared in the resource access manager to the account ID of the "child" account.
-2. The terraform code for the child account referencing this module needs to be applied.
-3. The request to attach the transit gateway to the VPC in the "child" account needs to be accepted within the account where the transit gateway exists.
+2. The "child" account needs to accept the resource share in the resource access manager.
+3. The terraform code for the child account referencing this module needs to be applied.
+4. The request to attach the transit gateway to the VPC in the "child" account needs to be accepted within the account where the transit gateway exists.
 
 ### To Reference A Tagged Version of the Repository
 
