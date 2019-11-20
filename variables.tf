@@ -128,6 +128,11 @@ variable "network_acl_rules" {
 }
 
 # transit gateway attachment
+variable "share_arn" {
+  description = "The resource access manager share ARN which contains the transit gateway resource"
+  default     = null
+}
+
 variable "create_tgw_attachment" {
   default = false
 }

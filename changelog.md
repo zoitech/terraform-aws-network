@@ -2,6 +2,9 @@
 IMPROVEMENTS:
 * Removed public subnets from transit gateway vpc attachment ([#13](https://github.com/zoitech/terraform-aws-network/issues/13))
 
+NEW FEATURES:
+* Added aws_ram_resource_share_accepter for the transit gateway attachment ([#15](https://github.com/zoitech/terraform-aws-network/issues/15))
+
 ## 1.0.1
 NEW FEATURES:
 * DHCP Options (Optional) ([#9](https://github.com/zoitech/terraform-aws-network/issues/9))
