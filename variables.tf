@@ -104,6 +104,7 @@ variable "netbios_node_type" {
 }
 
 # network acl
+## entire vpc
 variable "create_network_acl" {
   default = false
 }
@@ -124,7 +125,52 @@ variable "network_acl_rules" {
     to_port     = number
   }))
   default = null
+}
 
+## private subnets only
+variable "create_private_subnet_acl" {
+  default = false
+}
+
+variable "private_subnet_tag_name" {
+  default = "tf-vpc-network-private"
+}
+
+variable "private_subnet_acl_rules" {
+  type = list(object({
+    #network_acl_id = string
+    rule_number = number
+    egress      = bool
+    protocol    = string
+    rule_action = string
+    cidr_block  = string
+    from_port   = number
+    to_port     = number
+  }))
+  default = null
+}
+
+## public subnets only
+variable "create_public_subnet_acl" {
+  default = false
+}
+
+variable "public_subnet_tag_name" {
+  default = "tf-vpc-network-public"
+}
+
+variable "public_subnet_acl_rules" {
+  type = list(object({
+    #network_acl_id = string
+    rule_number = number
+    egress      = bool
+    protocol    = string
+    rule_action = string
+    cidr_block  = string
+    from_port   = number
+    to_port     = number
+  }))
+  default = null
 }
 
 # transit gateway attachment

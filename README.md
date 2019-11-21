@@ -114,6 +114,8 @@ module "network" {
 }
 ```
 
+Alternatively ACLs can be applied to private and public subnets separately via the variables "private_subnet_acl_rules" and "public_subnet_acl_rules" instead of using the variable "network_acl_rules".
+
 ### Transit Gateway Attachment to VPC
 
 To attach a transit gateway (already existing) from another account, set the variable "create_tgw_attachment" to "true" (without quotations) along with "share_arn", "transit_gateway_id" and "tgw_attachment_tag_name":
