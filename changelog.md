@@ -1,3 +1,8 @@
+## 1.0.4
+
+IMPROVEMENTS:
+* A network ACL can now be applied to all subnets within a VPC or on a private/public subnet basis ([#18](https://github.com/zoitech/terraform-aws-network/issues/18))
+
 ## 1.0.3
 
 NEW FEATURES:
