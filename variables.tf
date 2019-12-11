@@ -192,5 +192,6 @@ variable "tgw_attachment_tag_name" {
 }
 
 variable "tgw_destination_cidr_block" {
-  default = null
+  type    = list(string)
+  default = []
 }
