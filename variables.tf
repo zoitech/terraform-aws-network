@@ -191,6 +191,8 @@ variable "tgw_attachment_tag_name" {
   default = "my-company-network"
 }
 
-variable "tgw_destination_cidr_block" {
-  default = null
+variable "tgw_destination_cidr_blocks" {
+  description = "The IP ranges where traffic should be forwarded to the transit gateway"
+  type        = list(string)
+  default     = []
 }
