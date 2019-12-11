@@ -78,7 +78,7 @@ resource "aws_route" "rt_private_default" {
 resource "aws_route" "rt_private_transit_gateway" {
   count                  = local.create_private_tgw_routes
   route_table_id         = aws_route_table.rt_private.id
-  destination_cidr_block = element(var.tgw_destination_cidr_block, count.index)
+  destination_cidr_block = element(var.tgw_destination_cidr_blocks, count.index)
   transit_gateway_id     = aws_ec2_transit_gateway_vpc_attachment.network_transit_gateway[0].transit_gateway_id
 
   depends_on = [
