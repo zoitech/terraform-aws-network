@@ -1,3 +1,8 @@
+## 1.0.5
+
+IMPROVEMENTS:
+* Support multiple IP address range forwarding to the transit gateway ([#20](https://github.com/zoitech/terraform-aws-network/issues/20))
+
 ## 1.0.4
 
 IMPROVEMENTS:
