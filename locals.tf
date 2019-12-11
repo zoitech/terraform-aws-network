@@ -15,5 +15,5 @@ locals {
   create_public_subnet_acl_rules = (var.create_public_subnet_acl == true && var.public_subnet_acl_rules != null ? length(var.public_subnet_acl_rules) : 0)
   # tgw
   create_tgw_attachment     = (var.create_tgw_attachment == true ? 1 : 0)
-  create_private_tgw_routes = (var.create_tgw_attachment == true && var.tgw_destination_cidr_block != [] ? length(var.tgw_destination_cidr_block) : 0)
+  create_private_tgw_routes = (var.create_tgw_attachment == true && var.tgw_destination_cidr_blocks != [] ? length(var.tgw_destination_cidr_blocks) : 0)
 }
