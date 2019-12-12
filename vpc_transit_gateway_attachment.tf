@@ -1,8 +1,8 @@
 # 1.0.5n
-resource "aws_ram_resource_share_accepter" "network_transit_gateway" {
-  count     = local.create_tgw_attachment
-  share_arn = var.share_arn
-}
+# resource "aws_ram_resource_share_accepter" "network_transit_gateway" {
+#   count     = local.create_tgw_attachment
+#   share_arn = var.share_arn
+# }
 
 resource "aws_ec2_transit_gateway_vpc_attachment" "network_transit_gateway" {
   count              = local.create_tgw_attachment
@@ -14,7 +14,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "network_transit_gateway" {
     Name = var.tgw_attachment_tag_name
   }
   # 1.0.5n
-  depends_on = [
-    aws_ram_resource_share_accepter.network_transit_gateway,
-  ]
+  # depends_on = [
+  #   aws_ram_resource_share_accepter.network_transit_gateway,
+  # ]
 }
