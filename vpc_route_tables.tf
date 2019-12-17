@@ -64,7 +64,7 @@ resource "aws_route" "rt_public_default" {
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.igw[count.index].id
 
-  depends_on = ["aws_internet_gateway.igw"]
+  depends_on = [aws_internet_gateway.igw]
 }
 
 resource "aws_route" "rt_private_default" {
