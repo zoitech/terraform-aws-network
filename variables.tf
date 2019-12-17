@@ -81,26 +81,27 @@ variable "vpc_dhcp_options_tag_name" {
 }
 
 variable "domain_name" {
-  default = null
+  default = ""
 }
 
 variable "domain_name_servers" {
-  default = null
   type    = list
+  default = []
+
 }
 
 variable "ntp_servers" {
-  default = null
   type    = list
+  default = []
 }
 
 variable "netbios_name_servers" {
-  default = null
   type    = list
+  default = []
 }
 
 variable "netbios_node_type" {
-  default = null
+  default = ""
 }
 
 # network acl

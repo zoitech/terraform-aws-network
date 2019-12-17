@@ -1,3 +1,8 @@
+## 1.0.7
+
+IMPROVEMENTS:
+* small fixes to variable defaults
+
 ## 1.0.6
 
 IMPROVEMENTS:
