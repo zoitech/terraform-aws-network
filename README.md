@@ -118,7 +118,7 @@ Alternatively ACLs can be applied to private and public subnets separately via t
 
 ### Transit Gateway Attachment to VPC
 
-To attach a transit gateway (already existing) from another account, set the variable "create_tgw_attachment" to "true" (without quotations) along with "share_arn", "transit_gateway_id" and "tgw_attachment_tag_name":
+To attach a transit gateway (already existing) from another account, set the variable "create_tgw_attachment" to "true" (without quotations) along with, "accept_resource_share", "share_arn", "transit_gateway_id" and "tgw_attachment_tag_name":
 
 ```hcl
 module "network" {
@@ -127,11 +127,13 @@ module "network" {
   vpc_network             = "10.161.32.0/21"
   region                  = "eu-central-1"
   create_tgw_attachment   = true
+  accept_resource_share   = true
   share_arn               = "arn:aws:ram:eu-central-1:123456789123:resource-share/7ab74438-4ac2-0780-745d-1bf765ab5d7c"
   transit_gateway_id      = "tgw-12345678912345678"
   tgw_attachment_tag_name = "network-transitgw"
 }
 ```
+**Note: If a resource share was already accepted, the variable "accept_resource_share" can be set to *false***
 
 For the transit gateway attachment to be successful:
 
@@ -147,7 +149,7 @@ To reference a tagged version of the repository:
 
 ```hcl
 module "network" {
-  source      = "git::https://github.com/zoitech/terraform-aws-network.git?ref=1.0.2"
+  source      = "git::https://github.com/zoitech/terraform-aws-network.git?ref=1.0.6"
   vpc_name    = "my_vpc"
   vpc_network = "10.161.32.0/21"
   region      = "eu-central-1"
