@@ -86,17 +86,17 @@ variable "domain_name" {
 
 variable "domain_name_servers" {
   default = null
-  type    = "list"
+  type    = list
 }
 
 variable "ntp_servers" {
   default = null
-  type    = "list"
+  type    = list
 }
 
 variable "netbios_name_servers" {
   default = null
-  type    = "list"
+  type    = list
 }
 
 variable "netbios_node_type" {
@@ -174,9 +174,14 @@ variable "public_subnet_acl_rules" {
 }
 
 # transit gateway attachment
+variable "accept_resource_share" {
+  description = "Does the resource access manager resource share containaing the transit gateway need to be accepted?"
+  default     = false
+}
+
 variable "share_arn" {
   description = "The resource access manager share ARN which contains the transit gateway resource"
-  default     = null
+  default     = ""
 }
 
 variable "create_tgw_attachment" {
@@ -184,7 +189,7 @@ variable "create_tgw_attachment" {
 }
 
 variable "transit_gateway_id" {
-  default = null
+  default = ""
 }
 
 variable "tgw_attachment_tag_name" {

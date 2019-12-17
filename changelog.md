@@ -1,3 +1,8 @@
+## 1.0.6
+
+IMPROVEMENTS:
+* Make "aws_ram_resource_share_accepter" optional ([#27](https://github.com/zoitech/terraform-aws-network/issues/27))
+
 ## 1.0.5n
 
 Same as "1.0.5" but with no "aws_ram_resource_share_accepter" incase this step was done manually. Due to [import bug](https://github.com/terraform-providers/terraform-provider-aws/issues/10186)
