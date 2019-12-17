@@ -8,5 +8,5 @@ resource "aws_nat_gateway" "natgw" {
   allocation_id = aws_eip.natgw_eip.0.id
   subnet_id     = aws_subnet.sn_public_a.id
 
-  depends_on = ["aws_internet_gateway.igw"]
+  depends_on = [aws_internet_gateway.igw]
 }
