@@ -118,7 +118,7 @@ Alternatively ACLs can be applied to private and public subnets separately via t
 
 ### Transit Gateway Attachment to VPC
 
-To attach a transit gateway (already existing) from another account, set the variable "create_tgw_attachment" to "true" (without quotations) along with, "accept_resource_share", "share_arn", "transit_gateway_id" and "tgw_attachment_tag_name":
+To attach a transit gateway (already existing) from another account, set the variable "create_tgw_attachment" to "true" (without quotations) along with "accept_resource_share", "share_arn", "transit_gateway_id" and "tgw_attachment_tag_name":
 
 ```hcl
 module "network" {
