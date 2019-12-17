@@ -7,7 +7,7 @@ resource "aws_vpc_dhcp_options" "dhcp_options" {
   netbios_node_type    = var.netbios_node_type
 
   tags = {
-    Name = local.vpc_dhcp_options_tag_name
+    Name = var.vpc_dhcp_options_tag_name
   }
 }
 
