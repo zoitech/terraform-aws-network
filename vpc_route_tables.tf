@@ -17,17 +17,20 @@ resource "aws_route_table" "rt_private" {
 
 # route table associations
 resource "aws_route_table_association" "rt_public_a" {
-  subnet_id      = aws_subnet.sn_public_a.id
+  count = local.sn_public_a
+  subnet_id      = aws_subnet.sn_public_a[count.index].id
   route_table_id = aws_route_table.rt_public.id
 }
 
 resource "aws_route_table_association" "rt_public_b" {
-  subnet_id      = aws_subnet.sn_public_b.id
+  count = local.sn_public_b
+  subnet_id      = aws_subnet.sn_public_b[count.index].id
   route_table_id = aws_route_table.rt_public.id
 }
 
 resource "aws_route_table_association" "rt_public_c" {
-  subnet_id      = aws_subnet.sn_public_c.id
+  count = local.sn_public_c
+  subnet_id      = aws_subnet.sn_public_c[count.index].id
   route_table_id = aws_route_table.rt_public.id
 }
 
@@ -37,17 +40,20 @@ resource "aws_route_table_association" "rt_public_c" {
 // }
 
 resource "aws_route_table_association" "rt_private_a" {
-  subnet_id      = aws_subnet.sn_private_a.id
+  count = (var.vpc_network != "" ? length(var.private_subnets_a) :  1)
+  subnet_id      = aws_subnet.sn_private_a[count.index].id
   route_table_id = aws_route_table.rt_private.id
 }
 
 resource "aws_route_table_association" "rt_private_b" {
-  subnet_id      = aws_subnet.sn_private_b.id
+  count = (var.vpc_network != "" ? length(var.private_subnets_b) :  1)
+  subnet_id      = aws_subnet.sn_private_b[count.index].id
   route_table_id = aws_route_table.rt_private.id
 }
 
 resource "aws_route_table_association" "rt_private_c" {
-  subnet_id      = aws_subnet.sn_private_c.id
+  count = (var.vpc_network != "" ? length(var.private_subnets_c) :  1)
+  subnet_id      = aws_subnet.sn_private_c[count.index].id
   route_table_id = aws_route_table.rt_private.id
 }
 
