@@ -21,16 +21,24 @@ locals {
   create_tgw_attachment                                              = (var.create_tgw_attachment == true ? 1 : 0)
   create_private_tgw_routes                                          = (var.create_tgw_attachment == true && var.tgw_destination_cidr_blocks != [] ? length(var.tgw_destination_cidr_blocks) : 0)
 
+#Enable Dynamic Subnets:
+enable_dynamic_subnets = (length(var.private_subnets_a) > 0 || length(var.private_subnets_b) > 0 || length(var.private_subnets_c) > 0 || length(var.public_subnets_a) > 0 || length(var.public_subnets_b) > 0 || length(var.public_subnets_c) > 0  ? true : false)
+
   # Custom subnets
   # Private:
-  sn_private_a = (var.vpc_network == "" ? 1 : length(var.private_subnets_a))
-  sn_private_b = (var.vpc_network == "" ? 1 : length(var.private_subnets_b))
-  sn_private_c = (var.vpc_network == "" ? 1 : length(var.private_subnets_c))
+  sn_private_a = (length(var.private_subnets_a) > 0 && local.enable_dynamic_subnets == true ? length(var.private_subnets_a) : 1)
+  sn_private_b = (length(var.private_subnets_b) > 0 && local.enable_dynamic_subnets == true ? length(var.private_subnets_b) : 1)
+  sn_private_c = (length(var.private_subnets_c) > 0 && local.enable_dynamic_subnets == true ? length(var.private_subnets_c) : 1)
+  
   # Public: 
-  sn_public_a = (var.vpc_network == "" ? 1 : length(var.public_subnets_a))
-  sn_public_b = (var.vpc_network == "" ? 1 : length(var.public_subnets_b))
-  sn_public_c = (var.vpc_network == "" ? 1 : length(var.public_subnets_c))
-
+  # sn_public_a = (var.vpc_network == "" ? 1 : length(var.public_subnets_a))
+  # sn_public_b = (var.vpc_network == "" ? 1 : length(var.public_subnets_b))
+  # sn_public_c = (var.vpc_network == "" ? 1 : length(var.public_subnets_c))
+  sn_public_a = (length(var.public_subnets_a) > 0 && local.enable_dynamic_subnets == true ? length(var.public_subnets_a) : 1)
+  sn_public_b = (length(var.public_subnets_b) > 0 && local.enable_dynamic_subnets == true ? length(var.public_subnets_b) : 1)
+  sn_public_c = (length(var.public_subnets_c) > 0 && local.enable_dynamic_subnets == true ? length(var.public_subnets_c) : 1)
+  
+  # If creating dynamic subnets, check if the public subnets have been defined.
   public_subnet_defined = (length(var.public_subnets_a) > 0 || length(var.public_subnets_b) > 0 || length(var.public_subnets_c) > 0 ? true : false)
   
   # Public Subnet to be attached to the NAT Gateway

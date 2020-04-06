@@ -17,19 +17,22 @@ resource "aws_route_table" "rt_private" {
 
 # route table associations
 resource "aws_route_table_association" "rt_public_a" {
-  count = local.sn_public_a
+  # count = local.sn_public_a
+  count = (local.enable_dynamic_subnets == true ? local.sn_public_a : 1)
   subnet_id      = aws_subnet.sn_public_a[count.index].id
   route_table_id = aws_route_table.rt_public.id
 }
 
 resource "aws_route_table_association" "rt_public_b" {
-  count = local.sn_public_b
+  # count = local.sn_public_b
+  count = (local.enable_dynamic_subnets == true ? local.sn_public_b : 1)
   subnet_id      = aws_subnet.sn_public_b[count.index].id
   route_table_id = aws_route_table.rt_public.id
 }
 
 resource "aws_route_table_association" "rt_public_c" {
-  count = local.sn_public_c
+  # count = local.sn_public_c
+  count = (local.enable_dynamic_subnets == true ? local.sn_public_c : 1)
   subnet_id      = aws_subnet.sn_public_c[count.index].id
   route_table_id = aws_route_table.rt_public.id
 }
@@ -40,19 +43,22 @@ resource "aws_route_table_association" "rt_public_c" {
 // }
 
 resource "aws_route_table_association" "rt_private_a" {
-  count = (var.vpc_network != "" ? length(var.private_subnets_a) :  1)
+  # count = (var.vpc_network != "" ? length(var.private_subnets_a) :  1)
+  count = (local.enable_dynamic_subnets == true ? local.sn_private_a : 1)
   subnet_id      = aws_subnet.sn_private_a[count.index].id
   route_table_id = aws_route_table.rt_private.id
 }
 
 resource "aws_route_table_association" "rt_private_b" {
-  count = (var.vpc_network != "" ? length(var.private_subnets_b) :  1)
+  # count = (var.vpc_network != "" ? length(var.private_subnets_b) :  1)
+  count = (local.enable_dynamic_subnets == true ? local.sn_private_b : 1)
   subnet_id      = aws_subnet.sn_private_b[count.index].id
   route_table_id = aws_route_table.rt_private.id
 }
 
 resource "aws_route_table_association" "rt_private_c" {
-  count = (var.vpc_network != "" ? length(var.private_subnets_c) :  1)
+  # count = (var.vpc_network != "" ? length(var.private_subnets_c) :  1)
+  count = (local.enable_dynamic_subnets == true ? local.sn_private_c : 1)
   subnet_id      = aws_subnet.sn_private_c[count.index].id
   route_table_id = aws_route_table.rt_private.id
 }
