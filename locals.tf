@@ -26,18 +26,26 @@ enable_dynamic_subnets = (length(var.private_subnets_a) > 0 || length(var.privat
 
   # Custom subnets
   # Private:
-  sn_private_a = (length(var.private_subnets_a) > 0 && local.enable_dynamic_subnets == true ? length(var.private_subnets_a) : 1)
-  sn_private_b = (length(var.private_subnets_b) > 0 && local.enable_dynamic_subnets == true ? length(var.private_subnets_b) : 1)
-  sn_private_c = (length(var.private_subnets_c) > 0 && local.enable_dynamic_subnets == true ? length(var.private_subnets_c) : 1)
+  # sn_private_a = (length(var.private_subnets_a) > 0 && local.enable_dynamic_subnets == true ? length(var.private_subnets_a) : 1) 
+  # sn_private_b = (length(var.private_subnets_b) > 0 && local.enable_dynamic_subnets == true ? length(var.private_subnets_b) : 1)
+  # sn_private_c = (length(var.private_subnets_c) > 0 && local.enable_dynamic_subnets == true ? length(var.private_subnets_c) : 1)
   
+  sn_private_a = (local.enable_dynamic_subnets == false ? 1 : (length(var.private_subnets_a) > 0 ? length(var.private_subnets_a) : 0) )
+  sn_private_b = (local.enable_dynamic_subnets == false ? 1 : (length(var.private_subnets_b) > 0 ? length(var.private_subnets_b) : 0)) 
+  sn_private_c = (local.enable_dynamic_subnets == false ? 1 : (length(var.private_subnets_c) > 0 ? length(var.private_subnets_c) : 0)) 
+
+
   # Public: 
   # sn_public_a = (var.vpc_network == "" ? 1 : length(var.public_subnets_a))
   # sn_public_b = (var.vpc_network == "" ? 1 : length(var.public_subnets_b))
   # sn_public_c = (var.vpc_network == "" ? 1 : length(var.public_subnets_c))
-  sn_public_a = (length(var.public_subnets_a) > 0 && local.enable_dynamic_subnets == true ? length(var.public_subnets_a) : 1)
-  sn_public_b = (length(var.public_subnets_b) > 0 && local.enable_dynamic_subnets == true ? length(var.public_subnets_b) : 1)
-  sn_public_c = (length(var.public_subnets_c) > 0 && local.enable_dynamic_subnets == true ? length(var.public_subnets_c) : 1)
-  
+  # sn_public_a = (length(var.public_subnets_a) > 0 && local.enable_dynamic_subnets == true ? length(var.public_subnets_a) : 1)
+  # sn_public_b = (length(var.public_subnets_b) > 0 && local.enable_dynamic_subnets == true ? length(var.public_subnets_b) : 1)
+  # sn_public_c = (length(var.public_subnets_c) > 0 && local.enable_dynamic_subnets == true ? length(var.public_subnets_c) : 1)
+  sn_public_a = (local.enable_dynamic_subnets == false ? 1 : (length(var.public_subnets_a) > 0 ? length(var.public_subnets_a) : 0))
+  sn_public_b = (local.enable_dynamic_subnets == false ? 1 : (length(var.public_subnets_b) > 0 ? length(var.public_subnets_b) : 0)) 
+  sn_public_c = (local.enable_dynamic_subnets == false ? 1 : (length(var.public_subnets_c) > 0 ? length(var.public_subnets_c) : 0)) 
+
   # If creating dynamic subnets, check if the public subnets have been defined.
   public_subnet_defined = (length(var.public_subnets_a) > 0 || length(var.public_subnets_b) > 0 || length(var.public_subnets_c) > 0 ? true : false)
   
