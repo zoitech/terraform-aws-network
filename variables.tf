@@ -12,7 +12,7 @@ variable "vpc_name" {
 }
 
 variable "vpc_network" {
-  default     = "10.0.0.0/24"
+  default = "10.0.0.0/24"
   # default     = ""
   description = "Network within which the Subnets will be created."
 }
@@ -206,36 +206,36 @@ variable "tgw_destination_cidr_blocks" {
 
 variable "private_subnets_a" {
   description = "List of CIDR blocks for private subnets"
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
 }
 
 variable "private_subnets_b" {
   description = "List of CIDR blocks for private subnets"
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
 }
 
 variable "private_subnets_c" {
   description = "List of CIDR blocks for private subnets"
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
 }
 
 variable "public_subnets_a" {
   description = "List of CIDR blocks for public subnets in AZ A"
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
 }
 
 variable "public_subnets_b" {
   description = "List of CIDR blocks for public subnets in AZ B"
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
 }
 
 variable "public_subnets_c" {
   description = "List of CIDR blocks for public subnets in AZ C"
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
 }
