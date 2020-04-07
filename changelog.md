@@ -1,3 +1,9 @@
+## 1.1.0
+
+NEW FEATURES:
+* Support for dynamic subnet creation. Due to: [#31](https://github.com/zoitech/terraform-aws-network/issues/31)
+* Support for multiple subnets cration in the same availability zone. Due to: [#31](https://github.com/zoitech/terraform-aws-network/issues/31)
+
 ## 1.0.7
 
 IMPROVEMENTS:

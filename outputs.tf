@@ -17,11 +17,6 @@ output "sn_public_c_id" {
   description = "The ID of the 3rd Public Subnet."
 }
 
-// output "sn_public_d_id" {
-//   value       = aws_subnet.sn_public_d.id
-//   description = "The ID of the 4th Public Subnet."
-// }
-
 output "sn_private_a_id" {
   value       = aws_subnet.sn_private_a.*.id
   description = "The ID of the 1st Private Subnet."
@@ -36,11 +31,6 @@ output "sn_private_c_id" {
   value       = aws_subnet.sn_private_c.*.id
   description = "The ID of the 3rd Private Subnet."
 }
-
-// output "sn_private_d_id" {
-//   value       = aws_subnet.sn_private_d.id
-//   description = "The ID of the 4th Private Subnet."
-// }
 
 output "rt_public_id" {
   value       = aws_route_table.rt_public.id
