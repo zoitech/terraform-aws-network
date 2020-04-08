@@ -20,6 +20,43 @@ This module creates the following resources:
 
 ## Usage
 
+### Subnets creation
+
+The default behavior is to create 3 public subnets and 3 private subnets, 1 per availability zone.
+
+To define the subnets explicitly, set the following variables with an array of subnets in the CIDR notation (e.g.: "10.0.0.1/24"):
+  * private_subnets_a
+  * private_subnets_b
+  * private_subnets_c
+  * public_subnets_a
+  * public_subnets_b
+  * public_subnets_c
+
+```hcl
+module "network" {
+  source = "git::https://github.com/zoitech/terraform-aws-network.git"
+  vpc_name    = "my-vpc"
+  vpc_network = "10.0.0.0/21"
+  
+  private_subnets_a = ["10.0.0.0/25","10.0.0.128/25"]
+  private_subnets_b = ["10.0.1.0/25","10.0.1.128/25"]
+  private_subnets_c = ["10.0.2.0/24","10.0.3.0/24"]
+
+  public_subnets_a =  ["10.0.4.0/24"]
+  public_subnets_b =  ["10.0.5.0/24"]
+  public_subnets_c =  ["10.0.6.0/24","10.0.7.0/24"]
+  
+  create_nat = true
+  create_igw = true
+  region     = "eu-central-1"
+}
+```
+
+When any of these variables are set, the module will create only the subnets that are explicitly declared (No default subnets are created).
+
+**Please note: If you are creating only private subnets, the NAT Gateway will not be created**
+
+
 ### Internet and NAT Gateways
 
 A Internet Gateway or NAT Gateway are not created by default.
@@ -149,7 +186,7 @@ To reference a tagged version of the repository:
 
 ```hcl
 module "network" {
-  source      = "git::https://github.com/zoitech/terraform-aws-network.git?ref=1.0.6"
+  source      = "git::https://github.com/zoitech/terraform-aws-network.git?ref=1.1.0"
   vpc_name    = "my_vpc"
   vpc_network = "10.161.32.0/21"
   region      = "eu-central-1"

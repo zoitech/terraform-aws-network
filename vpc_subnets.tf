@@ -1,78 +1,73 @@
 # Private Subnets #
+# PRIVATE A
 resource "aws_subnet" "sn_private_a" {
+  count             = local.sn_private_a
   vpc_id            = aws_vpc.main.id
-  cidr_block        = cidrsubnet(var.vpc_network, 3, 0)
+  cidr_block        = (local.enable_dynamic_subnets == true ? var.private_subnets_a[count.index] : cidrsubnet(var.vpc_network, 3, 0))
   availability_zone = "${var.region}a"
 
   tags = {
-    Name = var.sn_private_a_name
+    Name = local.sn_private_a > 1 ? "${var.sn_private_a_name}_${count.index}" : var.sn_private_a_name
   }
 }
 
+# PRIVATE B
 resource "aws_subnet" "sn_private_b" {
+  count             = local.sn_private_b
   vpc_id            = aws_vpc.main.id
-  cidr_block        = cidrsubnet(var.vpc_network, 3, 1)
+  cidr_block        = (local.enable_dynamic_subnets == true ? var.private_subnets_b[count.index] : cidrsubnet(var.vpc_network, 3, 1))
   availability_zone = "${var.region}b"
+
   tags = {
-    Name = var.sn_private_b_name
+    Name = local.sn_private_b > 1 ? "${var.sn_private_b_name}_${count.index}" : var.sn_private_b_name
   }
 }
 
+# PRIVATE C
 resource "aws_subnet" "sn_private_c" {
+  count             = local.sn_private_c
   vpc_id            = aws_vpc.main.id
-  cidr_block        = cidrsubnet(var.vpc_network, 3, 2)
+  cidr_block        = (local.enable_dynamic_subnets == true ? var.private_subnets_c[count.index] : cidrsubnet(var.vpc_network, 3, 2))
   availability_zone = "${var.region}c"
+
   tags = {
-    Name = var.sn_private_c_name
+    Name = local.sn_private_c > 1 ? "${var.sn_private_c_name}_${count.index}" : var.sn_private_c_name
   }
 }
-
-// resource "aws_subnet" "sn_private_d" {
-//   vpc_id            = aws_vpc.main.id
-//   cidr_block        = cidrsubnet(var.vpc_network, 3, 3)
-//   availability_zone = "${var.region}d"
-//   tags = {
-//     Name = var.sn_private_d_name
-//   }
-// }
 
 # Public Subnets #
+# PUBLIC A
 resource "aws_subnet" "sn_public_a" {
+  count             = local.sn_public_a
   vpc_id            = aws_vpc.main.id
-  cidr_block        = cidrsubnet(var.vpc_network, 3, 4)
+  cidr_block        = (local.enable_dynamic_subnets == true ? var.public_subnets_a[count.index] : cidrsubnet(var.vpc_network, 3, 4))
   availability_zone = "${var.region}a"
 
   tags = {
-    Name = var.sn_public_a_name
+    Name = local.sn_public_a > 1 ? "${var.sn_public_a_name}_${count.index}" : var.sn_public_a_name
   }
 }
 
+# PUBLIC B
 resource "aws_subnet" "sn_public_b" {
+  count             = local.sn_public_b
   vpc_id            = aws_vpc.main.id
-  cidr_block        = cidrsubnet(var.vpc_network, 3, 5)
+  cidr_block        = (local.enable_dynamic_subnets == true ? var.public_subnets_b[count.index] : cidrsubnet(var.vpc_network, 3, 5))
   availability_zone = "${var.region}b"
 
   tags = {
-    Name = var.sn_public_b_name
+    Name = local.sn_public_b > 1 ? "${var.sn_public_b_name}_${count.index}" : var.sn_public_b_name
   }
 }
 
+# PUBLIC C
 resource "aws_subnet" "sn_public_c" {
+  count             = local.sn_public_c
   vpc_id            = aws_vpc.main.id
-  cidr_block        = cidrsubnet(var.vpc_network, 3, 6)
+  cidr_block        = (local.enable_dynamic_subnets == true ? var.public_subnets_c[count.index] : cidrsubnet(var.vpc_network, 3, 6))
   availability_zone = "${var.region}c"
 
   tags = {
-    Name = var.sn_public_c_name
+    Name = local.sn_public_c > 1 ? "${var.sn_public_c_name}_${count.index}" : var.sn_public_c_name
   }
 }
-
-// resource "aws_subnet" "sn_public_d" {
-//   vpc_id            = aws_vpc.main.id
-//   cidr_block        = cidrsubnet(var.vpc_network, 3, 7)
-//   availability_zone = "${var.region}d"
-
-//   tags = {
-//     Name = var.sn_public_d_name
-//   }
-// }
