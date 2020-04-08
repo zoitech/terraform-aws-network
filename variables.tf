@@ -205,19 +205,19 @@ variable "tgw_destination_cidr_blocks" {
 }
 
 variable "private_subnets_a" {
-  description = "List of CIDR blocks for private subnets"
+  description = "List of CIDR blocks for private subnets in AZ A"
   type        = list(string)
   default     = []
 }
 
 variable "private_subnets_b" {
-  description = "List of CIDR blocks for private subnets"
+  description = "List of CIDR blocks for private subnets in AZ B"
   type        = list(string)
   default     = []
 }
 
 variable "private_subnets_c" {
-  description = "List of CIDR blocks for private subnets"
+  description = "List of CIDR blocks for private subnets in AZ C"
   type        = list(string)
   default     = []
 }

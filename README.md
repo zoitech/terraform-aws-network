@@ -24,7 +24,7 @@ This module creates the following resources:
 
 The default behavior is to create 3 public subnets and 3 private subnets, 1 per availability zone.
 
-To define the subnets explicitly, set the following variables with an array of subnets in the CIDR notation (e.g.: "10.0.0.1/24"):
+To define the subnets explicitly, set the following variables with an array of subnets in the CIDR notation (e.g.: "10.0.1.0/24):
   * private_subnets_a
   * private_subnets_b
   * private_subnets_c
