@@ -204,7 +204,7 @@ For the transit gateway attachment to be successful:
 
 ### To Reference A Tagged Version of the Repository
 
-To reference a tagged version of the repository:
+Please refer to [CHANGELOG.md](CHANGELOG.md) for the latest release.
 
 ```hcl
 module "network" {
