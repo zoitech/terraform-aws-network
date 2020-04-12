@@ -239,3 +239,47 @@ variable "public_subnets_c" {
   type        = list(string)
   default     = []
 }
+
+# tags
+variable "vpc_tags" {
+  description = "Tags for the VPC"
+  type        = map(string)
+  default     = {}
+}
+
+variable "sn_private_a_tags" {
+  description = "List of maps containing key value tag pairs"
+  type        = list(map(string))
+  default     = []
+}
+
+variable "sn_private_b_tags" {
+  description = "List of maps containing key value tag pairs"
+  type        = list(map(string))
+  default     = []
+}
+
+variable "sn_private_c_tags" {
+  description = "List of maps containing key value tag pairs"
+  type        = list(map(string))
+  default     = []
+}
+
+variable "sn_public_a_tags" {
+  description = "List of maps containing key value tag pairs"
+  type        = list(map(string))
+  default     = []
+}
+
+variable "sn_public_b_tags" {
+  description = "List of maps containing key value tag pairs"
+  type        = list(map(string))
+  default     = []
+}
+
+variable "sn_public_c_tags" {
+  description = "List of maps containing key value tag pairs"
+  type        = list(map(string))
+  default     = []
+}
+

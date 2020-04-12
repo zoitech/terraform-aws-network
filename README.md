@@ -39,10 +39,32 @@ module "network" {
   vpc_network = "10.0.0.0/21"
   
   private_subnets_a = ["10.0.0.0/25","10.0.0.128/25"]
+  sn_private_a_tags = [
+    {
+      key1 = "key1_value"
+      key2 = "key2_value"
+      key3   = 0
+      key4  = true
+    },
+    {
+      key1 = "key1_value"
+      key2 = "key2_value"
+      key3   = 90
+      key4  = false
+    }
+  ]
   private_subnets_b = ["10.0.1.0/25","10.0.1.128/25"]
   private_subnets_c = ["10.0.2.0/24","10.0.3.0/24"]
 
   public_subnets_a =  ["10.0.4.0/24"]
+  sn_public_a_tags = [
+    {
+      key1 = "key1_value"
+      key2 = "key2_value"
+      key3   = 0
+      key4  = true
+    }
+  ]
   public_subnets_b =  ["10.0.5.0/24"]
   public_subnets_c =  ["10.0.6.0/24","10.0.7.0/24"]
   
@@ -182,11 +204,11 @@ For the transit gateway attachment to be successful:
 
 ### To Reference A Tagged Version of the Repository
 
-To reference a tagged version of the repository:
+Please refer to [changelog.md](changelog.md) for the latest release.
 
 ```hcl
 module "network" {
-  source      = "git::https://github.com/zoitech/terraform-aws-network.git?ref=1.1.0"
+  source      = "git::https://github.com/zoitech/terraform-aws-network.git?ref=1.2.0"
   vpc_name    = "my_vpc"
   vpc_network = "10.161.32.0/21"
   region      = "eu-central-1"

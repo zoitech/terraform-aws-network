@@ -1,3 +1,9 @@
+## 1.2.0
+
+ENHANCEMENT:
+
+* Added VPC and subnet tagging capabilities [#30](https://github.com/zoitech/terraform-aws-network/issues/30)
+
 ## 1.1.0
 
 NEW FEATURES:
