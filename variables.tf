@@ -204,6 +204,7 @@ variable "tgw_destination_cidr_blocks" {
   default     = []
 }
 
+# custom subnet ranges/quantities
 variable "private_subnets_a" {
   description = "List of CIDR blocks for private subnets in AZ A"
   type        = list(string)

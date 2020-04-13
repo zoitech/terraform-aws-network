@@ -1,6 +1,20 @@
+## 2.2.0
+
+BACKWARDS INCOMPATIBILITIES / NOTES:
+
+* Names for subnet ID outputs changed to reflect plural nature (e.g. "sn_private_a_id" is now "sn_private_a_ids" )
+
+BUG FIXES:
+
+* Fixed output for nat_ip
+
+ENHANCEMENTS:
+
+* Output for internet gateway ID
+
 ## 1.2.0
 
-ENHANCEMENT:
+ENHANCEMENTS:
 
 * Added VPC and subnet tagging capabilities [#30](https://github.com/zoitech/terraform-aws-network/issues/30)
 
