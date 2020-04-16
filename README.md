@@ -208,7 +208,7 @@ Please refer to [changelog.md](changelog.md) for the latest release.
 
 ```hcl
 module "network" {
-  source      = "git::https://github.com/zoitech/terraform-aws-network.git?ref=2.2.0"
+  source      = "git::https://github.com/zoitech/terraform-aws-network.git?ref=2.2.1"
   vpc_name    = "my_vpc"
   vpc_network = "10.161.32.0/21"
   region      = "eu-central-1"
