@@ -1,3 +1,9 @@
+## 2.2.1
+
+BUG FIXES:
+
+* Fixed "Error: Incorrect attribute value type" for "subnet_ids" parameters [#36](https://github.com/zoitech/terraform-aws-network/issues/36)
+
 ## 2.2.0
 
 BACKWARDS INCOMPATIBILITIES / NOTES:
