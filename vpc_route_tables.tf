@@ -2,17 +2,13 @@
 resource "aws_route_table" "rt_public" {
   vpc_id = aws_vpc.main.id
 
-  tags = {
-    Name = "Public Route"
-  }
+  tags =  merge({ "Name" = var.rt_public_tags }, var.rt_public_tags) 
 }
 
 resource "aws_route_table" "rt_private" {
   vpc_id = aws_vpc.main.id
 
-  tags = {
-    Name = "Private Route"
-  }
+  tags =  merge({ "Name" = var.rt_private_tags }, var.rt_private_tags)  
 }
 
 # route table associations

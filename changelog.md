@@ -1,3 +1,9 @@
+## 2.2.2
+
+ENHANCEMENTS:
+
+* Add IGW, NatGW and Route table tags to support backward compatibility
+
 ## 2.2.1
 
 BUG FIXES:
