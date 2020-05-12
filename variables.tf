@@ -285,25 +285,25 @@ variable "sn_public_c_tags" {
 }
 
 variable "nat_gw_tags" {
-  description = "List of maps containing key value tag pairs"
+  description = "Map containing key value tag pairs"
   type        = map(string)
-  default     = {}
+  default     = { "Name" = ""}
 }
 
 variable "igw_tags" {
-  description = "List of maps containing key value tag pairs"
+  description = "Map containing key value tag pairs"
   type        = map(string)
-  default     = {}
+  default     = { "Name" = "" }
 }
 
 variable "rt_private_tags" {
-  description = "List of maps containing key value tag pairs"
+  description = "Map containing key value tag pairs"
   type        = map(string)
   default     = { "Name" = "Private Route" }
 }
 
 variable "rt_public_tags" {
-  description = "List of maps containing key value tag pairs"
+  description = "Map containing key value tag pairs"
   type        = map(string)
   default     = { "Name" = "Public Route" }
 }

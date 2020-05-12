@@ -9,5 +9,5 @@ resource "aws_nat_gateway" "natgw" {
   subnet_id = local.vpc_nat_gateway_subnet_id
   depends_on = [aws_internet_gateway.igw]
 
-  tags =  length(var.nat_gw_tags) != 0 ? merge({  "Name" = var.nat_gw_tags }, var.nat_gw_tags) : {} 
+  tags =  local.nat_gw_tags 
 }
