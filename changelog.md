@@ -1,8 +1,14 @@
+## 2.2.3
+ENHANCEMENTS:
+
+* Rename domain_name variable to dhcp_domain_name
+
 ## 2.2.2
 
 ENHANCEMENTS:
 
 * Add IGW, NatGW and Route table tags to support backward compatibility
+
 
 ## 2.2.1
 

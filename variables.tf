@@ -81,7 +81,7 @@ variable "vpc_dhcp_options_tag_name" {
   default = "tf-dopt"
 }
 
-variable "domain_name" {
+variable "dhcp_domain_name" {
   default = ""
 }
 
