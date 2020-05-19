@@ -1,3 +1,13 @@
+## 2.2.3
+ENHANCEMENTS:
+
+* Rename dhcp_domain_name variables
+
+## 2.2.2
+ENHANCEMENTS:
+
+* Add Internet Gateway "igw" and Nat Gateway "nat_gw" tags to support backward compatibility
+
 ## 2.2.1
 
 BUG FIXES:
