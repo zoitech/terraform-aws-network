@@ -43,10 +43,10 @@ locals {
   sn_public_c = (local.enable_dynamic_subnets == false ? 1 : (length(var.public_subnets_c) > 0 ? length(var.public_subnets_c) : 0))
 
   #igw_tags
-  igw_tags =  merge( {  "Name" = var.igw_tags["Name"] }, var.igw_tags) 
+  igw_tags = merge( {  "Name" = var.vpc_name }, var.igw_tags) 
 
   #nat_gw_tags
-  nat_gw_tags = merge({  "Name" = var.nat_gw_tags["Name"] }, var.nat_gw_tags) 
+  nat_gw_tags = merge({  "Name" = var.vpc_name }, var.nat_gw_tags) 
 
   # Route table tags
   rt_private_tags = merge({ "Name" = var.rt_private_tags["Name"] }, var.rt_private_tags)  

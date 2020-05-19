@@ -287,13 +287,13 @@ variable "sn_public_c_tags" {
 variable "nat_gw_tags" {
   description = "Map containing key value tag pairs"
   type        = map(string)
-  default     = { "Name" = ""}
+  default     = {}
 }
 
 variable "igw_tags" {
   description = "Map containing key value tag pairs"
   type        = map(string)
-  default     = { "Name" = "" }
+  default     = {}
 }
 
 variable "rt_private_tags" {
