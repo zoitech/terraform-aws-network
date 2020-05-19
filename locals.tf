@@ -49,6 +49,8 @@ locals {
   nat_gw_tags = merge({  "Name" = var.vpc_name }, var.nat_gw_tags) 
 
   # Route table tags
-  rt_private_tags = merge({ "Name" = var.rt_private_tags["Name"] }, var.rt_private_tags)  
-  rt_public_tags = merge({ "Name" = var.rt_public_tags["Name"] }, var.rt_public_tags) 
+  rt_private_name = "Private Route" 
+  rt_public_name  = "Public Route"
+  rt_private_tags = merge({ "Name" = local.rt_private_name }, var.rt_private_tags)  
+  rt_public_tags = merge({ "Name" = local.rt_public_name }, var.rt_public_tags) 
 }

@@ -299,11 +299,11 @@ variable "igw_tags" {
 variable "rt_private_tags" {
   description = "Map containing key value tag pairs"
   type        = map(string)
-  default     = { "Name" = "Private Route" }
+  default     = {}
 }
 
 variable "rt_public_tags" {
   description = "Map containing key value tag pairs"
   type        = map(string)
-  default     = { "Name" = "Public Route" }
+  default     = {}
 }
