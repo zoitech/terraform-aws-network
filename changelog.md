@@ -1,4 +1,11 @@
+## 2.2.4
+
+BUG FIXES:
+
+* Fix terraform dhcp passed variables
+
 ## 2.2.3
+
 ENHANCEMENTS:
 
 * Rename domain_name variable to dhcp_domain_name
