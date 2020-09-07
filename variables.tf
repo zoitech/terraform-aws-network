@@ -315,18 +315,7 @@ variable "create_vpcep_s3" {
   default     = false
 }
 
-variable "create_vpcep_dynamodb" {
-  description = "Create VPC endpoint for DynamoDB if set to true"
-  default     = false
-}
-
 variable "vpcep_s3_tags" {
-  description = "Map containing key value tag pairs"
-  type        = map(string)
-  default     = {}
-}
-
-variable "vpcep_dynamodb_tags" {
   description = "Map containing key value tag pairs"
   type        = map(string)
   default     = {}
@@ -335,9 +324,4 @@ variable "vpcep_dynamodb_tags" {
 variable "vpcep_s3_name" {
   description = "The name of the S3 endpoint."
   default     = "S3 access"
-}
-
-variable "vpcep_dynamodb_name" {
-  description = "The name of the DynamoDB endpoint."
-  default     = "DynamoDB access"
 }

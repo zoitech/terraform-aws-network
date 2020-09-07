@@ -23,25 +23,14 @@ POLICY
   tags         = local.vpcep_s3_tags
 }
 
-resource "aws_vpc_endpoint" "dynamodb" {
-  count  = local.create_vpcep_dynamodb
-  vpc_id = aws_vpc.main.id
+# Route Table Associations
 
-  service_name = "com.amazonaws.${var.region}.s3"
-  policy       = <<POLICY
-{
-    "Version": "2012-10-17",
-    "Id": "Policy1568307208199",
-    "Statement": [
-        {
-            "Sid": "Stmt1568307206805",
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": "dynamodb:*",
-            "Resource": "*"
-        }
-    ]
+resource "aws_vpc_endpoint_route_table_association" "s3_public_rt" {
+  route_table_id  = aws_route_table.rt_public.id
+  vpc_endpoint_id = aws_vpc_endpoint.s3[0].id
 }
-POLICY
-  tags         = local.vpcep_dynamodb_tags
+
+resource "aws_vpc_endpoint_route_table_association" "s3_private_rt" {
+  route_table_id  = aws_route_table.rt_private.id
+  vpc_endpoint_id = aws_vpc_endpoint.s3[0].id
 }
