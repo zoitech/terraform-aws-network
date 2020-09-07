@@ -307,3 +307,21 @@ variable "rt_public_tags" {
   type        = map(string)
   default     = {}
 }
+
+# VPC Endpoints
+
+variable "create_vpcep_s3" {
+  description = "Create VPC endpoint for S3 if set to true"
+  default     = false
+}
+
+variable "vpcep_s3_tags" {
+  description = "Map containing key value tag pairs"
+  type        = map(string)
+  default     = {}
+}
+
+variable "vpcep_s3_name" {
+  description = "The name of the S3 endpoint."
+  default     = "S3 access"
+}

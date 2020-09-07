@@ -2,13 +2,13 @@
 resource "aws_route_table" "rt_public" {
   vpc_id = aws_vpc.main.id
 
-  tags =  local.rt_public_tags
+  tags = local.rt_public_tags
 }
 
 resource "aws_route_table" "rt_private" {
   vpc_id = aws_vpc.main.id
 
-  tags =  local.rt_private_tags
+  tags = local.rt_private_tags
 }
 
 # route table associations
