@@ -43,14 +43,22 @@ locals {
   sn_public_c = (local.enable_dynamic_subnets == false ? 1 : (length(var.public_subnets_c) > 0 ? length(var.public_subnets_c) : 0))
 
   #igw_tags
-  igw_tags = merge( {  "Name" = var.vpc_name }, var.igw_tags) 
+  igw_tags = merge({ "Name" = var.vpc_name }, var.igw_tags)
 
   #nat_gw_tags
-  nat_gw_tags = merge({  "Name" = var.vpc_name }, var.nat_gw_tags) 
+  nat_gw_tags = merge({ "Name" = var.vpc_name }, var.nat_gw_tags)
 
   # Route table tags
-  rt_private_name = "Private Route" 
+  rt_private_name = "Private Route"
   rt_public_name  = "Public Route"
-  rt_private_tags = merge({ "Name" = local.rt_private_name }, var.rt_private_tags)  
-  rt_public_tags = merge({ "Name" = local.rt_public_name }, var.rt_public_tags) 
+  rt_private_tags = merge({ "Name" = local.rt_private_name }, var.rt_private_tags)
+  rt_public_tags  = merge({ "Name" = local.rt_public_name }, var.rt_public_tags)
+
+  # VPC Endpoints
+  create_vpcep_s3       = (var.create_vpcep_s3 == true ? 1 : 0)
+  create_vpcep_dynamodb = (var.create_vpcep_dynamodb == true ? 1 : 0)
+
+  vpcep_s3_tags       = merge({ "Name" = var.vpc_name }, var.vpcep_s3_tags)
+  vpcep_dynamodb_tags = merge({ "Name" = var.vpc_name }, var.vpcep_dynamodb_tags)
+
 }

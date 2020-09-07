@@ -307,3 +307,27 @@ variable "rt_public_tags" {
   type        = map(string)
   default     = {}
 }
+
+# VPC Endpoints
+
+variable "create_vpcep_s3" {
+  description = "Create VPC endpoint for S3 if set to true"
+  default     = false
+}
+
+variable "create_vpcep_dynamodb" {
+  description = "Create VPC endpoint for DynamoDB if set to true"
+  default     = false
+}
+
+variable "vpcep_s3_tags" {
+  description = "Map containing key value tag pairs"
+  type        = map(string)
+  default     = {}
+}
+
+variable "vpcep_dynamodb_tags" {
+  description = "Map containing key value tag pairs"
+  type        = map(string)
+  default     = {}
+}
