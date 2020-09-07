@@ -17,6 +17,7 @@ This module creates the following resources:
 * Elastic IP for NAT Gateway (Optional)
 * Network ACL (Optional)
 * Transit Gateway attachment to the VPC (Optional)
+* VPC Gateway for S3 (Optional)
 
 ## Usage
 
@@ -201,6 +202,27 @@ For the transit gateway attachment to be successful:
 3. In the account with the transit gateway: wait until the shared principal status for the "child" account is "associated" (otherwise step 4. will fail)
 4. In the "child" account: Run and apply the terraform code referencing this module.
 5. In the account with the transit gateway: The request to attach the transit gateway to the VPC from the "child" account needs to be accepted within the transit gateway resource (unless auto accept is activated).
+
+### VPC Gateway for S3
+
+A VPC Gateway for S3 is not created by default.
+
+Setting the argument "create_vpcep_s3" to "true" will create a VPC Gateway.
+
+Setting "create_vpcep_s3" to "true" will create the following:
+
+* VPC Gateway for S3 w/ policy
+* A route in the public and private route table pointing to the VPC Gateway for S3
+
+```hcl
+module "network" {
+  source      = "git::https://github.com/zoitech/terraform-aws-network.git"
+  vpc_name    = "my_vpc"
+  vpc_network = "10.161.32.0/21"
+  region      = "eu-central-1"
+  create_vpcep_s3 = true
+}
+```
 
 ### To Reference A Tagged Version of the Repository
 
