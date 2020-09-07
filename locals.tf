@@ -58,7 +58,7 @@ locals {
   create_vpcep_s3       = (var.create_vpcep_s3 == true ? 1 : 0)
   create_vpcep_dynamodb = (var.create_vpcep_dynamodb == true ? 1 : 0)
 
-  vpcep_s3_tags       = merge({ "Name" = var.vpc_name }, var.vpcep_s3_tags)
-  vpcep_dynamodb_tags = merge({ "Name" = var.vpc_name }, var.vpcep_dynamodb_tags)
+  vpcep_s3_tags       = merge({ "Name" = var.vpcep_s3_name }, var.vpcep_s3_tags)
+  vpcep_dynamodb_tags = merge({ "Name" = var.vpcep_dynamodb_name }, var.vpcep_dynamodb_tags)
 
 }

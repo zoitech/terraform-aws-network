@@ -331,3 +331,13 @@ variable "vpcep_dynamodb_tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "vpcep_s3_name" {
+  description = "The name of the S3 endpoint."
+  default     = "S3 access"
+}
+
+variable "vpcep_dynamodb_name" {
+  description = "The name of the DynamoDB endpoint."
+  default     = "DynamoDB access"
+}
