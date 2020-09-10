@@ -52,11 +52,13 @@ resource "aws_route_table_association" "rt_private_c" {
 ## VPC Endpoint
 
 resource "aws_vpc_endpoint_route_table_association" "s3_public_rt" {
+  count           = local.create_vpcep_s3
   route_table_id  = aws_route_table.rt_public.id
   vpc_endpoint_id = aws_vpc_endpoint.s3[0].id
 }
 
 resource "aws_vpc_endpoint_route_table_association" "s3_private_rt" {
+  count           = local.create_vpcep_s3
   route_table_id  = aws_route_table.rt_private.id
   vpc_endpoint_id = aws_vpc_endpoint.s3[0].id
 }
