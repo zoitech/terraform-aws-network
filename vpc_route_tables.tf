@@ -48,6 +48,20 @@ resource "aws_route_table_association" "rt_private_c" {
   route_table_id = aws_route_table.rt_private.id
 }
 
+
+## VPC Endpoint
+
+resource "aws_vpc_endpoint_route_table_association" "s3_public_rt" {
+  route_table_id  = aws_route_table.rt_public.id
+  vpc_endpoint_id = aws_vpc_endpoint.s3[0].id
+}
+
+resource "aws_vpc_endpoint_route_table_association" "s3_private_rt" {
+  route_table_id  = aws_route_table.rt_private.id
+  vpc_endpoint_id = aws_vpc_endpoint.s3[0].id
+}
+
+
 # routes
 resource "aws_route" "rt_public_default" {
   count                  = local.create_igw
