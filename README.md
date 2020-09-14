@@ -207,7 +207,7 @@ For the transit gateway attachment to be successful:
 
 A VPC Gateway for S3 is not created by default.
 
-Setting the argument "create_vpcep_s3" to "true" will create a VPC Gateway.
+Setting the argument "create_vpcep_s3" to "true" will create a VPC Gateway for S3.
 
 Setting "create_vpcep_s3" to "true" will create the following:
 
@@ -221,6 +221,27 @@ module "network" {
   vpc_network = "10.161.32.0/21"
   region      = "eu-central-1"
   create_vpcep_s3 = true
+}
+```
+
+### VPC Gateway for DynamoDB
+
+A VPC Gateway for DynamoDB is not created by default.
+
+Setting the argument "create_vpcep_dynamodb" to "true" will create a VPC Gateway for DynamoDB.
+
+Setting "create_vpcep_dynamodb" to "true" will create the following:
+
+* VPC Gateway for DynamoDB w/ policy
+* A route in the public and private route table pointing to the VPC Gateway for DynamoDB
+
+```hcl
+module "network" {
+  source      = "git::https://github.com/zoitech/terraform-aws-network.git"
+  vpc_name    = "my_vpc"
+  vpc_network = "10.161.32.0/21"
+  region      = "eu-central-1"
+  create_vpcep_dynamodb = true
 }
 ```
 
