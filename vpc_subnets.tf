@@ -9,6 +9,7 @@ resource "aws_subnet" "sn_private_a" {
   tags = merge(
     {
       Name = local.sn_private_a > 1 ? "${var.sn_private_a_name}_${count.index}" : var.sn_private_a_name
+      Tier = "Private"
     },
     length(var.sn_private_a_tags) != 0 ? var.sn_private_a_tags[count.index] : {}
   )
@@ -24,6 +25,7 @@ resource "aws_subnet" "sn_private_b" {
   tags = merge(
     {
       Name = local.sn_private_b > 1 ? "${var.sn_private_b_name}_${count.index}" : var.sn_private_b_name
+      Tier = "Private"
     },
     length(var.sn_private_b_tags) != 0 ? var.sn_private_b_tags[count.index] : {}
   )
@@ -39,6 +41,7 @@ resource "aws_subnet" "sn_private_c" {
   tags = merge(
     {
       Name = local.sn_private_c > 1 ? "${var.sn_private_c_name}_${count.index}" : var.sn_private_c_name
+      Tier = "Private"
     },
     length(var.sn_private_c_tags) != 0 ? var.sn_private_c_tags[count.index] : {}
   )
@@ -55,6 +58,7 @@ resource "aws_subnet" "sn_public_a" {
   tags = merge(
     {
       Name = local.sn_public_a > 1 ? "${var.sn_public_a_name}_${count.index}" : var.sn_public_a_name
+      Tier = "Public"
     },
     length(var.sn_public_a_tags) != 0 ? var.sn_public_a_tags[count.index] : {}
   )
@@ -70,6 +74,7 @@ resource "aws_subnet" "sn_public_b" {
   tags = merge(
     {
       Name = local.sn_public_b > 1 ? "${var.sn_public_b_name}_${count.index}" : var.sn_public_b_name
+      Tier = "Public"
     },
     length(var.sn_public_b_tags) != 0 ? var.sn_public_b_tags[count.index] : {}
   )
@@ -85,6 +90,7 @@ resource "aws_subnet" "sn_public_c" {
   tags = merge(
     {
       Name = local.sn_public_c > 1 ? "${var.sn_public_c_name}_${count.index}" : var.sn_public_c_name
+      Tier = "Public"
     },
     length(var.sn_public_c_tags) != 0 ? var.sn_public_c_tags[count.index] : {}
   )
