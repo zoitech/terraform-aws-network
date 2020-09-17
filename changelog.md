@@ -1,3 +1,10 @@
+## 2.2.5
+
+ENHANCEMENTS:
+
+* Add optional creation of VPC Gateway for AWS S3
+* Add optional creation of VPC Gateway for AWS DynamoDB
+
 ## 2.2.4
 
 BUG FIXES:

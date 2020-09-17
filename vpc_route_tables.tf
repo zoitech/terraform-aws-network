@@ -2,13 +2,13 @@
 resource "aws_route_table" "rt_public" {
   vpc_id = aws_vpc.main.id
 
-  tags =  local.rt_public_tags
+  tags = local.rt_public_tags
 }
 
 resource "aws_route_table" "rt_private" {
   vpc_id = aws_vpc.main.id
 
-  tags =  local.rt_private_tags
+  tags = local.rt_private_tags
 }
 
 # route table associations
@@ -46,6 +46,37 @@ resource "aws_route_table_association" "rt_private_c" {
   count          = (local.enable_dynamic_subnets == true ? local.sn_private_c : 1)
   subnet_id      = aws_subnet.sn_private_c[count.index].id
   route_table_id = aws_route_table.rt_private.id
+}
+
+## VPC Endpoint
+
+resource "aws_vpc_endpoint_route_table_association" "s3_public_rt" {
+  count           = local.create_vpcep_s3
+  vpc_endpoint_id = aws_vpc_endpoint.s3[0].id
+  route_table_id  = element(aws_route_table.rt_public.*.id, count.index)
+
+
+}
+
+resource "aws_vpc_endpoint_route_table_association" "s3_private_rt" {
+  count           = local.create_vpcep_s3
+  vpc_endpoint_id = aws_vpc_endpoint.s3[0].id
+  route_table_id  = element(aws_route_table.rt_private.*.id, count.index)
+
+}
+
+resource "aws_vpc_endpoint_route_table_association" "dynamodb_public_rt" {
+  count           = local.create_vpcep_dynamodb
+  vpc_endpoint_id = aws_vpc_endpoint.dynamodb[0].id
+  route_table_id  = element(aws_route_table.rt_public.*.id, count.index)
+
+}
+
+resource "aws_vpc_endpoint_route_table_association" "dynamodb_private_rt" {
+  count           = local.create_vpcep_dynamodb
+  vpc_endpoint_id = aws_vpc_endpoint.dynamodb[0].id
+  route_table_id  = element(aws_route_table.rt_private.*.id, count.index)
+
 }
 
 # routes
