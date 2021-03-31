@@ -26,6 +26,7 @@ locals {
   accept_resource_share                                              = (var.create_tgw_attachment == true && var.accept_resource_share == true ? 1 : 0)
   depends_on_aws_ram_resource_share_accepter_network_transit_gateway = (var.create_tgw_attachment == true && var.accept_resource_share == true ? aws_ram_resource_share_accepter.network_transit_gateway : null)
   create_tgw_attachment                                              = (var.create_tgw_attachment == true ? 1 : 0)
+  create_tgw_attachment_without_ram                                  = (var.create_tgw_attachment_without_ram == true ? 1 : 0)
   create_private_tgw_routes                                          = (var.create_tgw_attachment == true && var.tgw_destination_cidr_blocks != [] ? length(var.tgw_destination_cidr_blocks) : 0)
 
   #Enable Dynamic Subnets:

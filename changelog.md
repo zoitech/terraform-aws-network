@@ -2,8 +2,9 @@
 
 ENHANCEMENTS:
 
-* Add optional creation of VPC Gateway for AWS S3
-* Add optional creation of VPC Gateway for AWS DynamoDB
+* Add optional creation of VPC Gateway for AWS S3 [42](https://github.com/zoitech/terraform-aws-network/issues/42)
+* Add optional creation of VPC Gateway for AWS DynamoDB [42](https://github.com/zoitech/terraform-aws-network/issues/42)
+* TGW attachment can now be created without a RAM share in the terraform code [47](https://github.com/zoitech/terraform-aws-network/issues/47)
 
 ## 2.2.4
 
