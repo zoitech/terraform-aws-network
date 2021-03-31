@@ -17,3 +17,14 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "network_transit_gateway" {
     local.depends_on_aws_ram_resource_share_accepter_network_transit_gateway
   ]
 }
+
+resource "aws_ec2_transit_gateway_vpc_attachment" "network_transit_gateway_without_ram" {
+  count              = local.create_tgw_attachment_without_ram
+  subnet_ids         = flatten([aws_subnet.sn_private_a[*].id, aws_subnet.sn_private_b[*].id, aws_subnet.sn_private_c[*].id])
+  transit_gateway_id = var.transit_gateway_id
+  vpc_id             = aws_vpc.main.id
+
+  tags = {
+    Name = var.tgw_attachment_tag_name
+  }
+}
