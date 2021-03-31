@@ -190,6 +190,10 @@ variable "create_tgw_attachment" {
   default = false
 }
 
+variable "create_tgw_attachment_without_ram" {
+  default = false
+}
+
 variable "transit_gateway_id" {
   default = ""
 }
