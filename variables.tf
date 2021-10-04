@@ -245,6 +245,26 @@ variable "public_subnets_c" {
   default     = []
 }
 
+# Availability Zones 
+
+variable "az1" {
+  description = "Availabilty zone for Subnet A"
+  type        = string
+  default     = ""
+}
+
+variable "az2" {
+  description = "Availabilty zone for Subnet B"
+  type        = string
+  default     = ""
+}
+
+variable "az3" {
+  description = "Availabilty zone for Subnet C"
+  type        = string
+  default     = ""
+}
+
 # tags
 variable "vpc_tags" {
   description = "Tags for the VPC"
