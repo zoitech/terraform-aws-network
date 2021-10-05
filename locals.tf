@@ -63,10 +63,12 @@ locals {
   vpcep_dynamodb_tags   = merge({ "Name" = var.vpcep_dynamodb_name }, var.vpcep_dynamodb_tags)
 
   # Enable dynamic AZs
-  enable_dynamic_azs = ((length(var.az1) > 0 || length(var.az1) > 0 || length(var.az3) > 0 ) ? true : false)
+  enable_dynamic_az1 =  (length(var.az1) > 0 ? true : false)
+  enable_dynamic_az2 =  (length(var.az2) > 0 ? true : false)
+  enable_dynamic_az3 =  (length(var.az3) > 0 ? true : false)
   # Availability Zones
-  az1 = (local.enable_dynamic_azs == false ? "${var.region}a" : var.az1)
-  az2 = (local.enable_dynamic_azs == false ? "${var.region}b" : var.az2)
-  az3 = (local.enable_dynamic_azs == false ? "${var.region}c" : var.az3)
+  az1 = (local.enable_dynamic_az1 == false ? "${var.region}a" : var.az1)
+  az2 = (local.enable_dynamic_az2 == false ? "${var.region}b" : var.az2)
+  az3 = (local.enable_dynamic_az3 == false ? "${var.region}c" : var.az3)
 
 }
