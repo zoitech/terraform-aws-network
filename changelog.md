@@ -1,3 +1,8 @@
+## 2.3.0
+
+ENHANCEMENTS:
+* Pass the availabilty Zones as variables that can be dynamically changed if the region don't support the AZ [50] (https://github.com/zoitech/terraform-aws-network/issues/50)
+
 ## 2.2.5
 
 ENHANCEMENTS:
