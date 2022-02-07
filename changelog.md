@@ -1,3 +1,11 @@
+## 2.4.0
+
+ENHANCEMENTS:
+* Upgraded terraform version to 0.13  [#49](https://github.com/zoitech/terraform-aws-network/issues/49)
+
+BACKWARDS INCOMPATIBILITIES / NOTES:
+* Works with terraform 0.13.x
+
 ## 2.3.0
 
 ENHANCEMENTS:
