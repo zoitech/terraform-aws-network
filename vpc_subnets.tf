@@ -51,6 +51,7 @@ resource "aws_subnet" "sn_public_a" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = (local.enable_dynamic_subnets == true ? var.public_subnets_a[count.index] : cidrsubnet(var.vpc_network, 3, 4))
   availability_zone = local.az1
+  map_public_ip_on_launch = var.auto_assign_public_ip
 
   tags = merge(
     {
@@ -66,6 +67,7 @@ resource "aws_subnet" "sn_public_b" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = (local.enable_dynamic_subnets == true ? var.public_subnets_b[count.index] : cidrsubnet(var.vpc_network, 3, 5))
   availability_zone = local.az2
+  map_public_ip_on_launch = var.auto_assign_public_ip
 
   tags = merge(
     {
@@ -81,6 +83,7 @@ resource "aws_subnet" "sn_public_c" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = (local.enable_dynamic_subnets == true ? var.public_subnets_c[count.index] : cidrsubnet(var.vpc_network, 3, 6))
   availability_zone = local.az3
+  map_public_ip_on_launch = var.auto_assign_public_ip
 
   tags = merge(
     {
