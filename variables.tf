@@ -53,6 +53,12 @@ variable "sn_public_c_name" {
   default     = "Public C"
 }
 
+variable "auto_assign_public_ip" {
+  description = "Specify true to indicate that instances launched into the public subnets should be assigned a public IP address"
+  default = false
+  type = bool
+}
+
 // variable "sn_public_d_name" {
 //   description = "The name of the 4th Public Subnet which will be available in AZ-d."
 //   default     = "Public d"
