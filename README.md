@@ -203,6 +203,16 @@ For the transit gateway attachment to be successful:
 4. In the "child" account: Run and apply the terraform code referencing this module.
 5. In the account with the transit gateway: The request to attach the transit gateway to the VPC from the "child" account needs to be accepted within the transit gateway resource (unless auto accept is activated).
 
+### Transit Gateway Attachment and multiple subnets
+
+If a giving VPC has multiple subnets within the same availabilty zone, you need to specify which subnet should be used as the transit gateway attachment. 
+
+By default, the module uses the first subnet of each availability zone as the transit gateway attachemnt. Optionally, it is possible to specify a different subnet 
+by using the **tgw_attachment_aza_subnet**, **tgw_attachment_azb_subnet**, and **tgw_attachment_azc_subnet** variables. 
+
+The value of tgw_attachment_aza_subnet, tgw_attachment_azb_subnet, and tgw_attachment_azc_subnet is the index of the subnet to be attached to the transit gateway, 
+within the list of subnets in *private_subnets_a*, *private_subnets_b*, and *private_subnets_c*.
+
 ### VPC Gateway for S3
 
 A VPC Gateway for S3 is not created by default.

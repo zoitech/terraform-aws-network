@@ -86,18 +86,18 @@ variable "dhcp_domain_name" {
 }
 
 variable "domain_name_servers" {
-  type    = list
+  type    = list(any)
   default = []
 
 }
 
 variable "ntp_servers" {
-  type    = list
+  type    = list(any)
   default = []
 }
 
 variable "netbios_name_servers" {
-  type    = list
+  type    = list(any)
   default = []
 }
 
@@ -188,6 +188,21 @@ variable "share_arn" {
 
 variable "create_tgw_attachment" {
   default = false
+}
+
+variable "tgw_attachment_aza_subnet" {
+  description = "The private subnet in the availability zone A to be attached to the Transit Gateway"
+  default     = -1
+}
+
+variable "tgw_attachment_azb_subnet" {
+  description = "The private subnet in the availability zone B to be attached to the Transit Gateway"
+  default     = -1
+}
+
+variable "tgw_attachment_azc_subnet" {
+  description = "The private subnet in the availability zone C to be attached to the Transit Gateway"
+  default     = -1
 }
 
 variable "create_tgw_attachment_without_ram" {
