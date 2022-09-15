@@ -44,9 +44,9 @@ locals {
   sn_public_c = (local.enable_dynamic_subnets == false ? 1 : (length(var.public_subnets_c) > 0 ? length(var.public_subnets_c) : 0))
 
   # Private subnet to be attached to TGW.
-  private_a_tgw_attachment = local.sn_private_a > 0 ? (var.tgw_attachment_aza_subnet >= 0 ? aws_subnet.sn_private_a[var.tgw_attachment_aza_subnet].id : aws_subnet.sn_private_a[0].id) : ""
-  private_b_tgw_attachment = local.sn_private_b > 0 ? (var.tgw_attachment_azb_subnet >= 0 ? aws_subnet.sn_private_b[var.tgw_attachment_azb_subnet].id : aws_subnet.sn_private_b[0].id) : ""
-  private_c_tgw_attachment = local.sn_private_c > 0 ? (var.tgw_attachment_azc_subnet >= 0 ? aws_subnet.sn_private_c[var.tgw_attachment_azc_subnet].id : aws_subnet.sn_private_c[0].id) : ""
+  private_a_tgw_attachment = local.sn_private_a > 0 ? tolist([(var.tgw_attachment_aza_subnet >= 0 ? aws_subnet.sn_private_a[var.tgw_attachment_aza_subnet].id : aws_subnet.sn_private_a[0].id)]) : []
+  private_b_tgw_attachment = local.sn_private_b > 0 ? tolist([(var.tgw_attachment_azb_subnet >= 0 ? aws_subnet.sn_private_b[var.tgw_attachment_azb_subnet].id : aws_subnet.sn_private_b[0].id)]) : []
+  private_c_tgw_attachment = local.sn_private_c > 0 ? tolist([(var.tgw_attachment_azc_subnet >= 0 ? aws_subnet.sn_private_c[var.tgw_attachment_azc_subnet].id : aws_subnet.sn_private_c[0].id)]) : []
   subnet_ids               = flatten([local.private_a_tgw_attachment, local.private_b_tgw_attachment, local.private_c_tgw_attachment])
 
   #igw_tags
