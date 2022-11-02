@@ -1,15 +1,25 @@
+## 2.3.2
+
+FIX:
+* FIx Transit Gateway attachments ([#55](https://github.com/zoitech/terraform-aws-network/issues/55))
+
+## 2.3.1
+
+ENHANCEMENTS:
+* Transit Gateway attachments support AZ with multiple subnets ([#46](https://github.com/zoitech/terraform-aws-network/issues/55))
+
 ## 2.3.0
 
 ENHANCEMENTS:
-* Pass the availabilty Zones as variables that can be dynamically changed if the region don't support the AZ [50] (https://github.com/zoitech/terraform-aws-network/issues/50)
+* Pass the availabilty Zones as variables that can be dynamically changed if the region don't support the AZ ([#50](https://github.com/zoitech/terraform-aws-network/issues/50))
 
 ## 2.2.5
 
 ENHANCEMENTS:
 
-* Add optional creation of VPC Gateway for AWS S3 [42](https://github.com/zoitech/terraform-aws-network/issues/42)
-* Add optional creation of VPC Gateway for AWS DynamoDB [42](https://github.com/zoitech/terraform-aws-network/issues/42)
-* TGW attachment can now be created without a RAM share in the terraform code [47](https://github.com/zoitech/terraform-aws-network/issues/47)
+* Add optional creation of VPC Gateway for AWS S3 ([#42](https://github.com/zoitech/terraform-aws-network/issues/42))
+* Add optional creation of VPC Gateway for AWS DynamoDB ([#42](https://github.com/zoitech/terraform-aws-network/issues/42))
+* TGW attachment can now be created without a RAM share in the terraform code ([#47](https://github.com/zoitech/terraform-aws-network/issues/47))
 
 ## 2.2.4
 
@@ -34,7 +44,7 @@ ENHANCEMENTS:
 
 BUG FIXES:
 
-* Fixed "Error: Incorrect attribute value type" for "subnet_ids" parameters [#36](https://github.com/zoitech/terraform-aws-network/issues/36)
+* Fixed "Error: Incorrect attribute value type" for "subnet_ids" parameters ([#36](https://github.com/zoitech/terraform-aws-network/issues/36))
 
 ## 2.2.0
 
@@ -54,13 +64,13 @@ ENHANCEMENTS:
 
 ENHANCEMENTS:
 
-* Added VPC and subnet tagging capabilities [#30](https://github.com/zoitech/terraform-aws-network/issues/30)
+* Added VPC and subnet tagging capabilities ([#30](https://github.com/zoitech/terraform-aws-network/issues/30))
 
 ## 1.1.0
 
 NEW FEATURES:
-* Support for dynamic subnet creation. Due to: [#31](https://github.com/zoitech/terraform-aws-network/issues/31)
-* Support for multiple subnet creation in the same availability zone. Due to: [#31](https://github.com/zoitech/terraform-aws-network/issues/31)
+* Support for dynamic subnet creation. Due to: ([#31](https://github.com/zoitech/terraform-aws-network/issues/31))
+* Support for multiple subnet creation in the same availability zone. Due to: ([#31](https://github.com/zoitech/terraform-aws-network/issues/31))
 
 ## 1.0.7
 
