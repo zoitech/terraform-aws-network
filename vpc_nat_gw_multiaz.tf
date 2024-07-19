@@ -1,6 +1,7 @@
 # Muti-AZ NAT GW
 resource "aws_eip" "natgw_eip_multiaz" {
   for_each = toset(var.nat_gw_azs)
+  tags = {"Name" = "EIP NAT Gateway ${each.key}"} 
 
   lifecycle {
     ignore_changes = [tags]
@@ -14,7 +15,7 @@ resource "aws_nat_gateway" "natgw_multiaz" {
   subnet_id     = local.nat_gw_multi_az_public_subnets[each.key]
   depends_on    = [aws_internet_gateway.igw]
 
-  tags = merge({"Name" = "${var.vpc_name}-${each.key}"}, local.nat_gw_tags)
+  tags = merge(local.nat_gw_tags, {"Name" = "${var.vpc_name}-${each.key}"})
 
   lifecycle {
     ignore_changes = [tags]
@@ -27,7 +28,7 @@ resource "aws_route_table" "rt_private_multiaz" {
 
   vpc_id = aws_vpc.main.id
 
-  tags = merge({"Name" = upper("Private Route ${each.key}")}, local.rt_private_tags)
+  tags = merge(local.rt_private_tags, {"Name" = upper("Private Route ${each.key}")})
 
   lifecycle {
     ignore_changes = [tags]
