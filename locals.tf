@@ -85,12 +85,6 @@ locals {
     "c" = local.enable_dynamic_subnets ? aws_subnet.sn_public_c.0.id : null
   }
 
-  nat_gw_multi_az_private_subnets = {
-    "a" = local.enable_dynamic_subnets ? aws_subnet.sn_private_a.*.id : null
-    "b" = local.enable_dynamic_subnets ? aws_subnet.sn_private_b.*.id : null
-    "c" = local.enable_dynamic_subnets ? aws_subnet.sn_private_c.*.id : null
-  }
-
   multiaz_a_required = var.private_subnet_rt_per_az_association && contains(var.nat_gw_azs, "a")
   multiaz_b_required = var.private_subnet_rt_per_az_association && contains(var.nat_gw_azs, "b")
   multiaz_c_required = var.private_subnet_rt_per_az_association && contains(var.nat_gw_azs, "c")
