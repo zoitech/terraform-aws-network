@@ -74,13 +74,13 @@ resource "aws_route_table_association" "rt_private_a_multiaz" {
 }
 
 resource "aws_route_table_association" "rt_private_b_multiaz" {
-  count          = local.multiaz_a_required ? lenght(var.private_subnets_b) : 0
+  count          = local.multiaz_b_required ? lenght(var.private_subnets_b) : 0
   subnet_id      = aws_subnet.sn_private_b[count.index].id
   route_table_id = aws_route_table.rt_private_multiaz["b"].id
 }
 
 resource "aws_route_table_association" "rt_private_c_multiaz" {
-  count          = local.multiaz_a_required ? lenght(var.private_subnets_c) : 0
+  count          = local.multiaz_c_required ? lenght(var.private_subnets_c) : 0
   subnet_id      = aws_subnet.sn_private_c[count.index].id
   route_table_id = aws_route_table.rt_private_multiaz["c"].id
 }
