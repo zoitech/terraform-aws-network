@@ -67,6 +67,13 @@ resource "aws_route" "rt_private_multiaz_tgw_route_3" {
   transit_gateway_id     = aws_ec2_transit_gateway_vpc_attachment.network_transit_gateway[0].transit_gateway_id
 }
 
+resource "aws_vpc_endpoint_route_table_association" "rt_private_multiaz_s3_endpoint" {
+  for_each = aws_route_table.rt_private_multiaz
+
+  vpc_endpoint_id = aws_vpc_endpoint.s3[0].id
+  route_table_id  = aws_route_table.rt_private_multiaz[each.key].id
+}
+
 resource "aws_route_table_association" "rt_private_a_multiaz" {
   count          = local.multiaz_a_required ? length(var.private_subnets_a) : 0
   subnet_id      = aws_subnet.sn_private_a[count.index].id
