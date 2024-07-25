@@ -68,7 +68,7 @@ resource "aws_route" "rt_private_multiaz_tgw_route_3" {
 }
 
 resource "aws_vpc_endpoint_route_table_association" "rt_private_multiaz_s3_endpoint" {
-  for_each = aws_route_table.rt_private_multiaz
+  for_each = var.create_vpcep_s3 ? aws_route_table.rt_private_multiaz : []
 
   vpc_endpoint_id = aws_vpc_endpoint.s3[0].id
   route_table_id  = aws_route_table.rt_private_multiaz[each.key].id
