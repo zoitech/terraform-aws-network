@@ -71,7 +71,7 @@ resource "aws_vpc_endpoint_route_table_association" "rt_private_multiaz_s3_endpo
   for_each = { for rt, values in aws_route_table.rt_private_multiaz : rt => values if var.create_vpcep_s3 }
 
   vpc_endpoint_id = aws_vpc_endpoint.s3[0].id
-  route_table_id  = aws_route_table.rt_private_multiaz[each.key].idcd 
+  route_table_id  = aws_route_table.rt_private_multiaz[each.key].id
 }
 
 resource "aws_route_table_association" "rt_private_a_multiaz" {
