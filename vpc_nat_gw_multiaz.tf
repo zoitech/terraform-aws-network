@@ -44,7 +44,7 @@ resource "aws_route" "rt_private_multiaz_ngw_route" {
 }
 
 resource "aws_route" "rt_private_multiaz_tgw_route_1" {
-  for_each = aws_route_table.rt_private_multiaz
+  for_each = { for rt, values in aws_route_table.rt_private_multiaz : rt => values if var.create_tgw_attachment }
 
   route_table_id         = aws_route_table.rt_private_multiaz[each.key].id
   destination_cidr_block = "10.0.0.0/8"
@@ -52,7 +52,7 @@ resource "aws_route" "rt_private_multiaz_tgw_route_1" {
 }
 
 resource "aws_route" "rt_private_multiaz_tgw_route_2" {
-  for_each = aws_route_table.rt_private_multiaz
+  for_each = { for rt, values in aws_route_table.rt_private_multiaz : rt => values if var.create_tgw_attachment }
 
   route_table_id         = aws_route_table.rt_private_multiaz[each.key].id
   destination_cidr_block = "172.16.0.0/12"
@@ -60,7 +60,7 @@ resource "aws_route" "rt_private_multiaz_tgw_route_2" {
 }
 
 resource "aws_route" "rt_private_multiaz_tgw_route_3" {
-  for_each = aws_route_table.rt_private_multiaz
+  for_each = { for rt, values in aws_route_table.rt_private_multiaz : rt => values if var.create_tgw_attachment }
 
   route_table_id         = aws_route_table.rt_private_multiaz[each.key].id
   destination_cidr_block = "192.168.0.0/16"

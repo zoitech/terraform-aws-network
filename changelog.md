@@ -1,3 +1,7 @@
+## 2.4.0
+ENHANCEMENTS:
+* Adding support for Multi-AZ NAT Gateway deployments
+
 ## 2.3.2
 
 FIX:

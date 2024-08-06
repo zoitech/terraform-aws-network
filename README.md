@@ -18,6 +18,7 @@ This module creates the following resources:
 * Network ACL (Optional)
 * Transit Gateway attachment to the VPC (Optional)
 * VPC Gateway for S3 (Optional)
+* Multi-AZ NAT Gateway (alternative to the single NAT GW option)
 
 ## Usage
 
@@ -252,6 +253,22 @@ module "network" {
   vpc_network = "10.161.32.0/21"
   region      = "eu-central-1"
   create_vpcep_dynamodb = true
+}
+```
+
+### Multi-AZ NAT Gateway deployment
+
+In cases where a Multi-AZ NAT Gateway deployment is needed, two additional parameters have been added to control the setup. The parameter "nat_gw_azs" is the list of AZ's (Availability Zones) on which the NAT Gateway should be deployed and the parameter "private_subnet_rt_per_az_association" is a boolean which controls the association to the new Route tables assigned per AZ, rather than the association to the default "Private Route". It will also add routes for the Transit Gateway and S3 endpoint, if enabled, on the new per-AZ route tables.
+
+```hcl
+module "network" {
+  source                               = "git::https://github.com/zoitech/terraform-aws-network.git"
+  vpc_name                             = "my_vpc"
+  vpc_network                          = "10.161.32.0/21"
+  region                               = "eu-central-1"
+  create_igw                           = true
+  nat_gw_azs                           = ["b", "c"]
+  private_subnet_rt_per_az_association = true
 }
 ```
 
