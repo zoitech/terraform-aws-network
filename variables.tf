@@ -380,3 +380,17 @@ variable "vpcep_dynamodb_name" {
   description = "The name of the DynamoDB endpoint."
   default     = "DynamoDB access"
 }
+
+# Multi-AZ NAT GW
+
+variable "private_subnet_rt_per_az_association" {
+  description = "Whether to associate the proper subnets to the RT specific per AZ"
+  type        = bool
+  default     = false
+}
+
+variable "nat_gw_azs" {
+  description = "AZ on which the NAT GW's should be deployed. Can be 'a,b', 'a,c' or 'c,b'"
+  type        = list(string)
+  default     = []
+}

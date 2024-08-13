@@ -31,19 +31,19 @@ resource "aws_route_table_association" "rt_public_c" {
 }
 
 resource "aws_route_table_association" "rt_private_a" {
-  count          = (local.enable_dynamic_subnets == true ? local.sn_private_a : 1)
+  count          = local.multiaz_a_required ? 0 : (local.enable_dynamic_subnets == true ? local.sn_private_a : 1)
   subnet_id      = aws_subnet.sn_private_a[count.index].id
   route_table_id = aws_route_table.rt_private.id
 }
 
 resource "aws_route_table_association" "rt_private_b" {
-  count          = (local.enable_dynamic_subnets == true ? local.sn_private_b : 1)
+  count          = local.multiaz_b_required ? 0 : (local.enable_dynamic_subnets == true ? local.sn_private_b : 1)
   subnet_id      = aws_subnet.sn_private_b[count.index].id
   route_table_id = aws_route_table.rt_private.id
 }
 
 resource "aws_route_table_association" "rt_private_c" {
-  count          = (local.enable_dynamic_subnets == true ? local.sn_private_c : 1)
+  count          = local.multiaz_c_required ? 0 : (local.enable_dynamic_subnets == true ? local.sn_private_c : 1)
   subnet_id      = aws_subnet.sn_private_c[count.index].id
   route_table_id = aws_route_table.rt_private.id
 }
@@ -54,7 +54,6 @@ resource "aws_vpc_endpoint_route_table_association" "s3_public_rt" {
   count           = local.create_vpcep_s3
   vpc_endpoint_id = aws_vpc_endpoint.s3[0].id
   route_table_id  = element(aws_route_table.rt_public.*.id, count.index)
-
 
 }
 
