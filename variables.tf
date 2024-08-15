@@ -394,3 +394,11 @@ variable "nat_gw_azs" {
   type        = list(string)
   default     = []
 }
+
+# Additional CIDRs to VPC
+
+variable "vpc_additional_cidr" {
+  description = "Additional CIDRs for VPC"
+  type        = list(string)
+  default     = []
+}
