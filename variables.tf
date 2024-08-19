@@ -402,3 +402,94 @@ variable "vpc_additional_cidr" {
   type        = list(string)
   default     = []
 }
+
+variable "additional_private_subnets_a" {
+  description = "List of CIDR blocks for private subnets in AZ A"
+  type        = list(string)
+  default     = []
+}
+variable "additional_private_subnets_b" {
+  description = "List of CIDR blocks for private subnets in AZ B"
+  type        = list(string)
+  default     = []
+}
+variable "additional_private_subnets_c" {
+  description = "List of CIDR blocks for private subnets in AZ C"
+  type        = list(string)
+  default     = []
+}
+variable "additional_public_subnets_a" {
+  description = "List of CIDR blocks for public subnets in AZ A"
+  type        = list(string)
+  default     = []
+}
+
+variable "additional_public_subnets_b" {
+  description = "List of CIDR blocks for public subnets in AZ B"
+  type        = list(string)
+  default     = []
+}
+variable "additional_public_subnets_c" {
+  description = "List of CIDR blocks for public subnets in AZ C"
+  type        = list(string)
+  default     = []
+}
+variable "additional_sn_private_a_name" {
+  description = "The name of the 1st Public Subnet which will be available in AZ-a."
+  default     = "Private A"
+}
+variable "additional_sn_private_b_name" {
+  description = "The name of the 1st Public Subnet which will be available in AZ-a."
+  default     = "Private B"
+}
+variable "additional_sn_private_c_name" {
+  description = "The name of the 1st Public Subnet which will be available in AZ-a."
+  default     = "Private C"
+}
+
+variable "additional_sn_public_a_name" {
+  description = "The name of the 1st Public Subnet which will be available in AZ-a."
+  default     = "Public A"
+}
+
+variable "additional_sn_public_b_name" {
+  description = "The name of the 2nd Public Subnet which will be available in AZ-b."
+  default     = "Public B"
+}
+
+variable "additional_sn_public_c_name" {
+  description = "The name of the 3rd Public Subnet which will be available in AZ-c."
+  default     = "Public C"
+}
+variable "additional_sn_private_a_tags" {
+  description = "List of maps containing key value tag pairs"
+  type        = list(map(string))
+  default     = []
+}
+variable "additional_sn_private_b_tags" {
+  description = "List of maps containing key value tag pairs"
+  type        = list(map(string))
+  default     = []
+}
+variable "additional_sn_private_c_tags" {
+  description = "List of maps containing key value tag pairs"
+  type        = list(map(string))
+  default     = []
+}
+variable "additional_sn_public_a_tags" {
+  description = "List of maps containing key value tag pairs"
+  type        = list(map(string))
+  default     = []
+}
+
+variable "additional_sn_public_b_tags" {
+  description = "List of maps containing key value tag pairs"
+  type        = list(map(string))
+  default     = []
+}
+
+variable "additional_sn_public_c_tags" {
+  description = "List of maps containing key value tag pairs"
+  type        = list(map(string))
+  default     = []
+}

@@ -88,4 +88,14 @@ locals {
   multiaz_a_required = var.private_subnet_rt_per_az_association && contains(var.nat_gw_azs, "a")
   multiaz_b_required = var.private_subnet_rt_per_az_association && contains(var.nat_gw_azs, "b")
   multiaz_c_required = var.private_subnet_rt_per_az_association && contains(var.nat_gw_azs, "c")
+
+  # Additional CIDRs to VPC
+  enable_additional_cidr = (length(var.vpc_additional_cidr) > 0 ? true : false)
+  additional_sn_private_a = (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_private_subnets_a) > 0 ? length(var.additional_private_subnets_a) : 0))
+  additional_sn_private_b = (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_private_subnets_b) > 0 ? length(var.additional_private_subnets_b) : 0))
+  additional_sn_private_c = (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_private_subnets_c) > 0 ? length(var.additional_private_subnets_c) : 0))
+  additional_sn_public_a = (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_a) > 0 ? length(var.additional_public_subnets_a) : 0))
+  additional_sn_public_b = (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_b) > 0 ? length(var.additional_public_subnets_b) : 0))
+  additional_sn_public_c = (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_c) > 0 ? length(var.additional_public_subnets_c) : 0))
+  
 }
