@@ -493,3 +493,18 @@ variable "additional_sn_public_c_tags" {
   type        = list(map(string))
   default     = []
 }
+
+variable "tgw_attachment_aza_additional_subnet" {
+  description = "The private subnet in the availability zone A to be attached to the Transit Gateway"
+  default     = -1
+}
+
+variable "tgw_attachment_azb_additional_subnet" {
+  description = "The private subnet in the availability zone B to be attached to the Transit Gateway"
+  default     = -1
+}
+
+variable "tgw_attachment_azc_additional_subnet" {
+  description = "The private subnet in the availability zone C to be attached to the Transit Gateway"
+  default     = -1
+}
