@@ -14,7 +14,7 @@ resource "aws_subnet" "additional_sn_private_a" {
 
   tags = merge(
     {
-      Name = local.additional_sn_private_a > 0 ? "${var.additional_sn_private_a_name}${count.index+2}" : var.additional_sn_private_a_name # Why 1 instead of 0 ?
+      Name = local.additional_sn_private_a > 0 ? "${var.additional_sn_private_a_name}${count.index+2}" : var.additional_sn_private_a_name 
     },
     length(var.additional_sn_private_a_tags) != 0 ? var.additional_sn_private_a_tags[count.index] : {}
   )
