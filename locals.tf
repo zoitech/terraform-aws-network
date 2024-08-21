@@ -50,7 +50,7 @@ locals {
   additional_private_a_tgw_attachment = local.additional_sn_private_a > 0 ? tolist([(var.tgw_attachment_aza_additional_subnet >= 0 ? aws_subnet.additional_sn_private_a[var.tgw_attachment_aza_additional_subnet].id : aws_subnet.additional_sn_private_a[0].id)]) : []
   additional_private_b_tgw_attachment = local.additional_sn_private_b > 0 ? tolist([(var.tgw_attachment_azb_additional_subnet >= 0 ? aws_subnet.additional_sn_private_b[var.tgw_attachment_azb_additional_subnet].id : aws_subnet.additional_sn_private_b[0].id)]) : []
   additional_private_c_tgw_attachment = local.additional_sn_private_c > 0 ? tolist([(var.tgw_attachment_azc_additional_subnet >= 0 ? aws_subnet.additional_sn_private_c[var.tgw_attachment_azc_additional_subnet].id : aws_subnet.additional_sn_private_c[0].id)]) : []
-  subnet_ids                          = flatten([local.private_a_tgw_attachment, local.private_b_tgw_attachment, local.private_c_tgw_attachment], local.additional_private_a_tgw_attachment, local.additional_private_b_tgw_attachment, local.additional_private_c_tgw_attachment)
+  subnet_ids                          = flatten([local.private_a_tgw_attachment, local.private_b_tgw_attachment, local.private_c_tgw_attachment, local.additional_private_a_tgw_attachment, local.additional_private_b_tgw_attachment, local.additional_private_c_tgw_attachment])
 
   #igw_tags
   igw_tags = merge({ "Name" = var.vpc_name }, var.igw_tags)
