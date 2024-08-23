@@ -5,7 +5,7 @@ resource "aws_vpc_ipv4_cidr_block_association" "additional_cidr" {
 }
 
 # Additional Private Subnets #
-# PRIVATE A[count+2]
+
 resource "aws_subnet" "additional_sn_private_a" {
   count             = local.additional_sn_private_a
   vpc_id            = aws_vpc.main.id
@@ -21,7 +21,7 @@ resource "aws_subnet" "additional_sn_private_a" {
 
   depends_on = [aws_vpc_ipv4_cidr_block_association.additional_cidr]
 }
-# PRIVATE B[count+2]
+
 resource "aws_subnet" "additional_sn_private_b" {
   count             = local.additional_sn_private_b
   vpc_id            = aws_vpc.main.id
@@ -37,7 +37,7 @@ resource "aws_subnet" "additional_sn_private_b" {
 
   depends_on = [aws_vpc_ipv4_cidr_block_association.additional_cidr]
 }
-# PRIVATE C[count+2]
+
 resource "aws_subnet" "additional_sn_private_c" {
   count             = local.additional_sn_private_c
   vpc_id            = aws_vpc.main.id
@@ -55,7 +55,7 @@ resource "aws_subnet" "additional_sn_private_c" {
 }
 
 # Additional Public Subnets #
-# PUBLIC A[count+2]
+
 resource "aws_subnet" "additional_sn_public_a" {
   count             = local.additional_sn_public_a
   vpc_id            = aws_vpc.main.id
@@ -72,7 +72,7 @@ resource "aws_subnet" "additional_sn_public_a" {
   depends_on = [aws_vpc_ipv4_cidr_block_association.additional_cidr]
 }
 
-# PUBLIC B[count+2]
+
 resource "aws_subnet" "additional_sn_public_b" {
   count             = local.additional_sn_public_b
   vpc_id            = aws_vpc.main.id
@@ -89,7 +89,7 @@ resource "aws_subnet" "additional_sn_public_b" {
   depends_on = [aws_vpc_ipv4_cidr_block_association.additional_cidr]
 }
 
-# PUBLIC C[count+2]
+
 resource "aws_subnet" "additional_sn_public_c" {
   count             = local.additional_sn_public_c
   vpc_id            = aws_vpc.main.id

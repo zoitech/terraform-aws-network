@@ -97,9 +97,5 @@ locals {
   additional_sn_public_a = (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_a) > 0 ? length(var.additional_public_subnets_a) : 0))
   additional_sn_public_b = (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_b) > 0 ? length(var.additional_public_subnets_b) : 0))
   additional_sn_public_c = (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_c) > 0 ? length(var.additional_public_subnets_c) : 0))
-  # additional_private_a_tgw_attachment = local.additional_sn_private_a > 0 ? tolist([(var.tgw_attachment_aza_additional_subnet >= 0 ? aws_subnet.additional_sn_private_a[var.tgw_attachment_aza_additional_subnet].id : aws_subnet.additional_sn_private_a[0].id)]) : []
-  # additional_private_b_tgw_attachment = local.additional_sn_private_b > 0 ? tolist([(var.tgw_attachment_azb_additional_subnet >= 0 ? aws_subnet.additional_sn_private_b[var.tgw_attachment_azb_additional_subnet].id : aws_subnet.additional_sn_private_b[0].id)]) : []
-  # additional_private_c_tgw_attachment = local.additional_sn_private_c > 0 ? tolist([(var.tgw_attachment_azc_additional_subnet >= 0 ? aws_subnet.additional_sn_private_c[var.tgw_attachment_azc_additional_subnet].id : aws_subnet.additional_sn_private_c[0].id)]) : []
-  # additional_subnet_ids                          = flatten([local.additional_private_a_tgw_attachment, local.additional_private_b_tgw_attachment, local.additional_private_c_tgw_attachment])
 
 }
