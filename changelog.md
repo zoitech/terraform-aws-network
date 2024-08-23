@@ -1,3 +1,7 @@
+## 2.5.0
+ENHANCEMENTS:
+* Add support to multiple CIDRs in the a VPC
+
 ## 2.4.0
 ENHANCEMENTS:
 * Adding support for Multi-AZ NAT Gateway deployments
