@@ -272,6 +272,44 @@ module "network" {
 }
 ```
 
+### Additional CIDR blocks for VPC
+
+In case if VPC needs to be extended with new network range, new parameters were created.
+
+To define additional CIDR networks:
+
+  * vpc_additional_cidr
+
+To manually subnet network by AZ:
+
+  * additional_private_subnets_a
+  * additional_private_subnets_b
+  * additional_private_subnets_c
+  * additional_public_subnets_a
+  * additional_public_subnets_b
+  * additional_public_subnets_c
+
+
+```hcl
+module "network" {
+  source      = "git::https://github.com/zoitech/terraform-aws-network.git"
+  vpc_name    = "my_vpc"
+  vpc_network = "192.168.0.0/21"
+  region      = "eu-central-1"
+  
+  vpc_additional_cidr    = ["192.168.8.0/21", "192.168.16.0/21"]
+
+  additional_private_subnets_a     = ["192.168.8.0/24", "192.168.16.0/24"]
+  additional_private_subnets_b     = ["192.168.9.0/24", "192.168.17.128/24"]
+  additional_private_subnets_c     = ["192.168.10.0/24"]
+  additional_public_subnets_a      = ["192.168.11.0/24", "192.168.19.0/24"]
+  additional_public_subnets_b      = ["192.168.12.0/24"]
+  additional_public_subnets_c      = ["192.168.13.0/24"]
+
+}
+```
+
+
 ### To Reference A Tagged Version of the Repository
 
 Please refer to [changelog.md](changelog.md) for the latest release.
