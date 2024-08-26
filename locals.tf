@@ -80,9 +80,9 @@ locals {
 
   #Multi-AZ NAT GW subnets
   nat_gw_multi_az_public_subnets = {
-    "a" = local.enable_dynamic_subnets ? aws_subnet.sn_public_a.0.id : null
-    "b" = local.enable_dynamic_subnets ? aws_subnet.sn_public_b.0.id : null
-    "c" = local.enable_dynamic_subnets ? aws_subnet.sn_public_c.0.id : null
+    "a" = local.enable_dynamic_subnets && length(var.public_subnets_a) > 0 ? aws_subnet.sn_public_a.0.id : null
+    "b" = local.enable_dynamic_subnets && length(var.public_subnets_b) > 0 ? aws_subnet.sn_public_b.0.id : null
+    "c" = local.enable_dynamic_subnets && length(var.public_subnets_c) > 0 ? aws_subnet.sn_public_c.0.id : null
   }
 
   multiaz_a_required = var.private_subnet_rt_per_az_association && contains(var.nat_gw_azs, "a")
