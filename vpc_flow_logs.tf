@@ -94,7 +94,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket_expiration_rule" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_encryption" {
-  count = var.vpc_flow_log_kms_key_arn != "" ? 1 : 0
+  count = var.vpc_flow_log_bucket_name != "" && var.vpc_flow_log_kms_key_arn != "" ? 1 : 0
 
   bucket = aws_s3_bucket.bucket[0].id
   rule {
