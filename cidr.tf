@@ -108,36 +108,36 @@ resource "aws_subnet" "additional_sn_public_c" {
 
 # route table associations
 resource "aws_route_table_association" "additional_rt_private_a" {
-  count          = (local.enable_dynamic_subnets == true ? local.additional_sn_private_a : 1)
+  count          = (local.enable_additional_dynamic_subnets == true ? local.additional_sn_private_a : 1)
   subnet_id      = aws_subnet.additional_sn_private_a[count.index].id
   route_table_id = aws_route_table.rt_private.id
 }
 
 resource "aws_route_table_association" "additional_rt_private_b" {
-  count          = (local.enable_dynamic_subnets == true ? local.additional_sn_private_b : 1)
+  count          = (local.enable_additional_dynamic_subnets == true ? local.additional_sn_private_b : 1)
   subnet_id      = aws_subnet.additional_sn_private_b[count.index].id
   route_table_id = aws_route_table.rt_private.id
 }
 
 resource "aws_route_table_association" "additional_rt_private_c" {
-  count          = (local.enable_dynamic_subnets == true ? local.additional_sn_private_c : 1)
+  count          = (local.enable_additional_dynamic_subnets == true ? local.additional_sn_private_c : 1)
   subnet_id      = aws_subnet.additional_sn_private_c[count.index].id
   route_table_id = aws_route_table.rt_private.id
 }
 
 resource "aws_route_table_association" "additional_rt_public_a" {
-  count          = (local.enable_dynamic_subnets == true ? local.additional_sn_public_a : 1)
+  count          = (local.enable_additional_dynamic_subnets == true ? local.additional_sn_public_a : 1)
   subnet_id      = aws_subnet.additional_sn_public_a[count.index].id
   route_table_id = aws_route_table.rt_public.id
 }
 resource "aws_route_table_association" "additional_rt_public_b" {
-  count          = (local.enable_dynamic_subnets == true ? local.additional_sn_public_b : 1)
+  count          = (local.enable_additional_dynamic_subnets == true ? local.additional_sn_public_b : 1)
   subnet_id      = aws_subnet.additional_sn_public_b[count.index].id
   route_table_id = aws_route_table.rt_public.id
 }
 
 resource "aws_route_table_association" "additional_rt_public_c" {
-  count          = (local.enable_dynamic_subnets == true ? local.additional_sn_public_c : 1)
+  count          = (local.enable_additional_dynamic_subnets == true ? local.additional_sn_public_c : 1)
   subnet_id      = aws_subnet.additional_sn_public_c[count.index].id
   route_table_id = aws_route_table.rt_public.id
 }
