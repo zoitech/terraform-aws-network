@@ -312,7 +312,7 @@ module "network" {
 
 ### VPC flow logs
 
-You can enable VPC flow logs for your VPC. Either you use the variable "vpc_flow_log_bucket_name" to save your logs on a S3 bucket, or the variable "vpc_flow_log_cw_log_group_name" to save your logs on a Cloudwatch log group. In either case, the bucket or log group will be created for you with proper policies required. You can also define a custom retention policy or a custom log format if required.
+You can enable VPC flow logs for your VPC. Either you use the variable "vpc_flow_log_bucket_name" to save your logs on a S3 bucket, or the variable "vpc_flow_log_cw_log_group_name" to save your logs on a Cloudwatch log group. In either case, the bucket or log group will be created for you with proper policies required; encryption at rest with CMK can be enabled as well. You can also define a custom retention policy or a custom log format if required.
 
 ```hcl
 module "network" {
