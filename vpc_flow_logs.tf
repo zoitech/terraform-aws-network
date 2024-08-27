@@ -5,8 +5,8 @@ resource "aws_s3_bucket" "bucket" {
 
   bucket = var.vpc_flow_log_bucket_name
   tags = {
-    "Name" = var.vpc_flow_log_bucket_name,
-    "role" = "storage"
+    "Name"     = var.vpc_flow_log_bucket_name,
+    "role"     = "storage"
     "creation" = "terraform"
   }
 }
@@ -28,19 +28,19 @@ data "aws_iam_policy_document" "s3_bucket_policy_doc" {
     condition {
       test     = "StringEquals"
       variable = "aws:SourceAccount"
-      values = [data.aws_caller_identity.current.account_id]
+      values   = [data.aws_caller_identity.current.account_id]
     }
 
     condition {
       test     = "StringEquals"
       variable = "s3:x-amz-acl"
-      values = ["bucket-owner-full-control"]
+      values   = ["bucket-owner-full-control"]
     }
 
     condition {
       test     = "ArnLike"
       variable = "aws:SourceArn"
-      values = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:*"]
+      values   = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:*"]
     }
   }
 
@@ -61,13 +61,13 @@ data "aws_iam_policy_document" "s3_bucket_policy_doc" {
     condition {
       test     = "StringEquals"
       variable = "aws:SourceAccount"
-      values = [data.aws_caller_identity.current.account_id]
+      values   = [data.aws_caller_identity.current.account_id]
     }
 
     condition {
       test     = "ArnLike"
       variable = "aws:SourceArn"
-      values = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:*"]
+      values   = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:*"]
     }
   }
 }
@@ -93,6 +93,19 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket_expiration_rule" {
   }
 }
 
+resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_encryption" {
+  count = var.vpc_flow_log_kms_key_arn != "" ? 1 : 0
+
+  bucket = aws_s3_bucket.bucket[0].id
+  rule {
+    apply_server_side_encryption_by_default {
+      kms_master_key_id = var.vpc_flow_log_kms_key_arn
+      sse_algorithm     = "aws:kms"
+    }
+    bucket_key_enabled = true
+  }
+}
+
 resource "aws_flow_log" "flow_log_s3" {
   count = var.vpc_flow_log_bucket_name != "" ? 1 : 0
 
@@ -112,11 +125,12 @@ resource "aws_flow_log" "flow_log_s3" {
 resource "aws_cloudwatch_log_group" "cw_log" {
   count = var.vpc_flow_log_cw_log_group_name != "" ? 1 : 0
 
-  name = var.vpc_flow_log_cw_log_group_name
+  name              = var.vpc_flow_log_cw_log_group_name
   retention_in_days = var.vpc_flow_log_retention_period
+  kms_key_id        = var.vpc_flow_log_kms_key_arn != "" ? var.vpc_flow_log_kms_key_arn : null
   tags = {
-    "Name" = var.vpc_flow_log_cw_log_group_name,
-    "role" = "storage"
+    "Name"     = var.vpc_flow_log_cw_log_group_name,
+    "role"     = "storage"
     "creation" = "terraform"
   }
 }

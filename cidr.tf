@@ -1,7 +1,7 @@
 resource "aws_vpc_ipv4_cidr_block_association" "additional_cidr" {
-  for_each      = toset(var.vpc_additional_cidr)
-  vpc_id        = aws_vpc.main.id
-  cidr_block    = each.value
+  for_each   = toset(var.vpc_additional_cidr)
+  vpc_id     = aws_vpc.main.id
+  cidr_block = each.value
 }
 
 # Additional Private Subnets #
@@ -14,7 +14,7 @@ resource "aws_subnet" "additional_sn_private_a" {
 
   tags = merge(
     {
-      Name = local.additional_sn_private_a > 0 ? "${var.additional_sn_private_a_name}${count.index+2}" : var.additional_sn_private_a_name 
+      Name = local.additional_sn_private_a > 0 ? "${var.additional_sn_private_a_name}${count.index + 2}" : var.additional_sn_private_a_name
     },
     length(var.additional_sn_private_a_tags) != 0 ? var.additional_sn_private_a_tags[count.index] : {}
   )
@@ -30,7 +30,7 @@ resource "aws_subnet" "additional_sn_private_b" {
 
   tags = merge(
     {
-      Name = local.additional_sn_private_b > 0 ? "${var.additional_sn_private_b_name}${count.index+2}" : var.additional_sn_private_b_name
+      Name = local.additional_sn_private_b > 0 ? "${var.additional_sn_private_b_name}${count.index + 2}" : var.additional_sn_private_b_name
     },
     length(var.additional_sn_private_b_tags) != 0 ? var.additional_sn_private_b_tags[count.index] : {}
   )
@@ -46,7 +46,7 @@ resource "aws_subnet" "additional_sn_private_c" {
 
   tags = merge(
     {
-      Name = local.additional_sn_private_c > 0 ? "${var.additional_sn_private_c_name}${count.index+2}" : var.additional_sn_private_c_name
+      Name = local.additional_sn_private_c > 0 ? "${var.additional_sn_private_c_name}${count.index + 2}" : var.additional_sn_private_c_name
     },
     length(var.additional_sn_private_c_tags) != 0 ? var.additional_sn_private_c_tags[count.index] : {}
   )
@@ -64,7 +64,7 @@ resource "aws_subnet" "additional_sn_public_a" {
 
   tags = merge(
     {
-      Name = local.additional_sn_public_a > 0 ? "${var.additional_sn_public_a_name}${count.index+2}" : var.additional_sn_public_a_name
+      Name = local.additional_sn_public_a > 0 ? "${var.additional_sn_public_a_name}${count.index + 2}" : var.additional_sn_public_a_name
     },
     length(var.additional_sn_public_a_tags) != 0 ? var.additional_sn_public_a_tags[count.index] : {}
   )
@@ -81,7 +81,7 @@ resource "aws_subnet" "additional_sn_public_b" {
 
   tags = merge(
     {
-      Name = local.additional_sn_public_b > 0 ? "${var.additional_sn_public_b_name}${count.index+2}" : var.additional_sn_public_b_name
+      Name = local.additional_sn_public_b > 0 ? "${var.additional_sn_public_b_name}${count.index + 2}" : var.additional_sn_public_b_name
     },
     length(var.additional_sn_public_b_tags) != 0 ? var.additional_sn_public_b_tags[count.index] : {}
   )
@@ -98,7 +98,7 @@ resource "aws_subnet" "additional_sn_public_c" {
 
   tags = merge(
     {
-      Name = local.additional_sn_public_c > 0 ? "${var.additional_sn_public_c_name}${count.index+2}" : var.additional_sn_public_c_name
+      Name = local.additional_sn_public_c > 0 ? "${var.additional_sn_public_c_name}${count.index + 2}" : var.additional_sn_public_c_name
     },
     length(var.additional_sn_public_c_tags) != 0 ? var.additional_sn_public_c_tags[count.index] : {}
   )

@@ -525,3 +525,9 @@ variable "vpc_flow_log_custom_format" {
   type        = string
   default     = ""
 }
+
+variable "vpc_flow_log_kms_key_arn" {
+  description = "KMS Key ARN to encrypt either the bucket or CW log group to store VPC flow logs. KMS policy must allow access to principal delivery.logs.amazonaws.com or logs.<region>.amazonaws.com, depending the case"
+  type        = string
+  default     = ""
+}
