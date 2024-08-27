@@ -91,11 +91,11 @@ locals {
 
   # Additional CIDRs to VPC
   enable_additional_cidr = (length(var.vpc_additional_cidr) > 0 ? true : false)
-  additional_sn_private_a = (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_private_subnets_a) > 0 ? length(var.additional_private_subnets_a) : 0))
-  additional_sn_private_b = (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_private_subnets_b) > 0 ? length(var.additional_private_subnets_b) : 0))
-  additional_sn_private_c = (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_private_subnets_c) > 0 ? length(var.additional_private_subnets_c) : 0))
-  additional_sn_public_a = (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_a) > 0 ? length(var.additional_public_subnets_a) : 0))
-  additional_sn_public_b = (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_b) > 0 ? length(var.additional_public_subnets_b) : 0))
-  additional_sn_public_c = (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_c) > 0 ? length(var.additional_public_subnets_c) : 0))
+  additional_sn_private_a = (enable_additional_cidr == true ? (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_private_subnets_a) > 0 ? length(var.additional_private_subnets_a) : 0)) : 0)
+  additional_sn_private_b = (enable_additional_cidr == true ? (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_private_subnets_b) > 0 ? length(var.additional_private_subnets_b) : 0)) : 0)
+  additional_sn_private_c = (enable_additional_cidr == true ? (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_private_subnets_c) > 0 ? length(var.additional_private_subnets_c) : 0)) : 0)
+  additional_sn_public_a = (enable_additional_cidr == true ? (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_a) > 0 ? length(var.additional_public_subnets_a) : 0)) : 0)
+  additional_sn_public_b = (enable_additional_cidr == true ? (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_b) > 0 ? length(var.additional_public_subnets_b) : 0)) : 0)
+  additional_sn_public_c = (enable_additional_cidr == true ? (local.enable_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_c) > 0 ? length(var.additional_public_subnets_c) : 0)) : 0)
 
 }
