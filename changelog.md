@@ -1,6 +1,6 @@
 ## 2.5.1
 FIX:
-* Fix creation additonal networks for dynamic subnetting option
+* Fix creation additional networks for dynamic subnetting option
 
 ## 2.5.0
 ENHANCEMENTS:
