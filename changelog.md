@@ -1,9 +1,3 @@
-## 2.6.0
-ENHANCEMENTS:
-* VPC flow logs support
-FIX:
-* Add validation of existing AZ's for the Multi-AZ Gateway deployment
-
 ## 2.5.0
 ENHANCEMENTS:
 * Add support to multiple CIDRs in the a VPC
