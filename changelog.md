@@ -1,3 +1,7 @@
+## 2.5.1
+FIX:
+* Fix creation additional networks for dynamic subnetting option
+
 ## 2.5.0
 ENHANCEMENTS:
 * Add support to multiple CIDRs in the a VPC
@@ -9,7 +13,7 @@ ENHANCEMENTS:
 ## 2.3.2
 
 FIX:
-* FIx Transit Gateway attachments ([#55](https://github.com/zoitech/terraform-aws-network/issues/55))
+* Fix Transit Gateway attachments ([#55](https://github.com/zoitech/terraform-aws-network/issues/55))
 
 ## 2.3.1
 
