@@ -19,6 +19,7 @@ This module creates the following resources:
 * Transit Gateway attachment to the VPC (Optional)
 * VPC Gateway for S3 (Optional)
 * Multi-AZ NAT Gateway (alternative to the single NAT GW option)
+* VPC flow logs
 
 ## Usage
 
@@ -309,6 +310,20 @@ module "network" {
 }
 ```
 
+### VPC flow logs
+
+You can enable VPC flow logs for your VPC. Either you use the variable "vpc_flow_log_bucket_name" to save your logs on a S3 bucket, or the variable "vpc_flow_log_cw_log_group_name" to save your logs on a Cloudwatch log group. In either case, the bucket or log group will be created for you with proper policies required; encryption at rest with CMK can be enabled as well. You can also define a custom retention policy or a custom log format if required.
+
+```hcl
+module "network" {
+  source                        = "git::https://github.com/zoitech/terraform-aws-network.git"
+  vpc_name                      = "my_vpc"
+  vpc_network                   = "10.161.32.0/21"
+  region                        = "eu-central-1"
+  vpc_flow_log_bucket_name      = "zoi-example-vpc-flow-log"
+  vpc_flow_log_retention_period = 60
+}
+```
 
 ### To Reference A Tagged Version of the Repository
 

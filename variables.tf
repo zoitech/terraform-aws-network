@@ -493,3 +493,41 @@ variable "additional_sn_public_c_tags" {
   type        = list(map(string))
   default     = []
 }
+
+# VPC flow logs
+
+variable "vpc_flow_log_bucket_name" {
+  description = "Name of the S3 bucket that will contain the VPC flow logs"
+  type        = string
+  default     = ""
+}
+
+variable "vpc_flow_log_cw_log_group_name" {
+  description = "Name of the Cloudwatch log group that will contain the VPC flow logs"
+  type        = string
+  default     = ""
+}
+
+variable "vpc_flow_log_retention_period" {
+  description = "Retention period for the VPC flow logs. Applies to both S3 and Cloudwatch logs"
+  type        = number
+  default     = 30
+}
+
+variable "vpc_flow_log_traffic_type" {
+  description = "Whether to log accepted flows, rejected flows or both. Default is both"
+  type        = string
+  default     = "ALL"
+}
+
+variable "vpc_flow_log_custom_format" {
+  description = "Definition for the VPC log flow format, in case a custom definition is needed"
+  type        = string
+  default     = ""
+}
+
+variable "vpc_flow_log_kms_key_arn" {
+  description = "KMS Key ARN to encrypt either the bucket or CW log group to store VPC flow logs. KMS policy must allow access to principal delivery.logs.amazonaws.com or logs.<region>.amazonaws.com, depending the case"
+  type        = string
+  default     = ""
+}

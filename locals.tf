@@ -44,10 +44,10 @@ locals {
   sn_public_c = (local.enable_dynamic_subnets == false ? 1 : (length(var.public_subnets_c) > 0 ? length(var.public_subnets_c) : 0))
 
   # Private subnet to be attached to TGW.
-  private_a_tgw_attachment            = local.sn_private_a > 0 ? tolist([(var.tgw_attachment_aza_subnet >= 0 ? aws_subnet.sn_private_a[var.tgw_attachment_aza_subnet].id : aws_subnet.sn_private_a[0].id)]) : []
-  private_b_tgw_attachment            = local.sn_private_b > 0 ? tolist([(var.tgw_attachment_azb_subnet >= 0 ? aws_subnet.sn_private_b[var.tgw_attachment_azb_subnet].id : aws_subnet.sn_private_b[0].id)]) : []
-  private_c_tgw_attachment            = local.sn_private_c > 0 ? tolist([(var.tgw_attachment_azc_subnet >= 0 ? aws_subnet.sn_private_c[var.tgw_attachment_azc_subnet].id : aws_subnet.sn_private_c[0].id)]) : []
-  subnet_ids                          = flatten([local.private_a_tgw_attachment, local.private_b_tgw_attachment, local.private_c_tgw_attachment])
+  private_a_tgw_attachment = local.sn_private_a > 0 ? tolist([(var.tgw_attachment_aza_subnet >= 0 ? aws_subnet.sn_private_a[var.tgw_attachment_aza_subnet].id : aws_subnet.sn_private_a[0].id)]) : []
+  private_b_tgw_attachment = local.sn_private_b > 0 ? tolist([(var.tgw_attachment_azb_subnet >= 0 ? aws_subnet.sn_private_b[var.tgw_attachment_azb_subnet].id : aws_subnet.sn_private_b[0].id)]) : []
+  private_c_tgw_attachment = local.sn_private_c > 0 ? tolist([(var.tgw_attachment_azc_subnet >= 0 ? aws_subnet.sn_private_c[var.tgw_attachment_azc_subnet].id : aws_subnet.sn_private_c[0].id)]) : []
+  subnet_ids               = flatten([local.private_a_tgw_attachment, local.private_b_tgw_attachment, local.private_c_tgw_attachment])
 
   #igw_tags
   igw_tags = merge({ "Name" = var.vpc_name }, var.igw_tags)
@@ -80,9 +80,9 @@ locals {
 
   #Multi-AZ NAT GW subnets
   nat_gw_multi_az_public_subnets = {
-    "a" = local.enable_dynamic_subnets ? aws_subnet.sn_public_a.0.id : null
-    "b" = local.enable_dynamic_subnets ? aws_subnet.sn_public_b.0.id : null
-    "c" = local.enable_dynamic_subnets ? aws_subnet.sn_public_c.0.id : null
+    "a" = local.enable_dynamic_subnets && length(var.public_subnets_a) > 0 ? aws_subnet.sn_public_a.0.id : null
+    "b" = local.enable_dynamic_subnets && length(var.public_subnets_b) > 0 ? aws_subnet.sn_public_b.0.id : null
+    "c" = local.enable_dynamic_subnets && length(var.public_subnets_c) > 0 ? aws_subnet.sn_public_c.0.id : null
   }
 
   multiaz_a_required = var.private_subnet_rt_per_az_association && contains(var.nat_gw_azs, "a")
@@ -90,13 +90,13 @@ locals {
   multiaz_c_required = var.private_subnet_rt_per_az_association && contains(var.nat_gw_azs, "c")
 
   # Additional CIDRs to VPC
-  enable_additional_cidr = (length(var.vpc_additional_cidr) > 0 ? true : false)
+  enable_additional_cidr            = (length(var.vpc_additional_cidr) > 0 ? true : false)
   enable_additional_dynamic_subnets = (length(var.additional_private_subnets_a) > 0 || length(var.additional_private_subnets_b) > 0 || length(var.additional_private_subnets_c) > 0 || length(var.additional_public_subnets_a) > 0 || length(var.additional_public_subnets_b) > 0 || length(var.additional_public_subnets_c) > 0 ? true : false)
-  additional_sn_private_a = (length(var.vpc_additional_cidr) > 0 ? (local.enable_additional_dynamic_subnets == false ? 1 : (length(var.additional_private_subnets_a) > 0 ? length(var.additional_private_subnets_a) : 0)) : 0)
-  additional_sn_private_b = (length(var.vpc_additional_cidr) > 0 ? (local.enable_additional_dynamic_subnets == false ? 1 : (length(var.additional_private_subnets_b) > 0 ? length(var.additional_private_subnets_b) : 0)) : 0)
-  additional_sn_private_c = (length(var.vpc_additional_cidr) > 0 ? (local.enable_additional_dynamic_subnets == false ? 1 : (length(var.additional_private_subnets_c) > 0 ? length(var.additional_private_subnets_c) : 0)) : 0)
-  additional_sn_public_a = (length(var.vpc_additional_cidr) > 0 ? (local.enable_additional_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_a) > 0 ? length(var.additional_public_subnets_a) : 0)) : 0)
-  additional_sn_public_b = (length(var.vpc_additional_cidr) > 0 ? (local.enable_additional_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_b) > 0 ? length(var.additional_public_subnets_b) : 0)) : 0)
-  additional_sn_public_c = (length(var.vpc_additional_cidr) > 0 ? (local.enable_additional_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_c) > 0 ? length(var.additional_public_subnets_c) : 0)) : 0)
+  additional_sn_private_a           = (length(var.vpc_additional_cidr) > 0 ? (local.enable_additional_dynamic_subnets == false ? 1 : (length(var.additional_private_subnets_a) > 0 ? length(var.additional_private_subnets_a) : 0)) : 0)
+  additional_sn_private_b           = (length(var.vpc_additional_cidr) > 0 ? (local.enable_additional_dynamic_subnets == false ? 1 : (length(var.additional_private_subnets_b) > 0 ? length(var.additional_private_subnets_b) : 0)) : 0)
+  additional_sn_private_c           = (length(var.vpc_additional_cidr) > 0 ? (local.enable_additional_dynamic_subnets == false ? 1 : (length(var.additional_private_subnets_c) > 0 ? length(var.additional_private_subnets_c) : 0)) : 0)
+  additional_sn_public_a            = (length(var.vpc_additional_cidr) > 0 ? (local.enable_additional_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_a) > 0 ? length(var.additional_public_subnets_a) : 0)) : 0)
+  additional_sn_public_b            = (length(var.vpc_additional_cidr) > 0 ? (local.enable_additional_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_b) > 0 ? length(var.additional_public_subnets_b) : 0)) : 0)
+  additional_sn_public_c            = (length(var.vpc_additional_cidr) > 0 ? (local.enable_additional_dynamic_subnets == false ? 1 : (length(var.additional_public_subnets_c) > 0 ? length(var.additional_public_subnets_c) : 0)) : 0)
 
 }

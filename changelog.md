@@ -1,3 +1,9 @@
+## 2.6.0
+ENHANCEMENTS:
+* VPC flow logs support
+FIX:
+* Add validation of existing AZ's for the Multi-AZ Gateway deployment
+
 ## 2.5.1
 FIX:
 * Fix creation additional networks for dynamic subnetting option
