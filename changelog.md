@@ -1,3 +1,7 @@
+## 2.6.1
+ENHANCEMENTS:
+* Add variables to tag VPC flow log resources
+
 ## 2.6.0
 ENHANCEMENTS:
 * VPC flow logs support

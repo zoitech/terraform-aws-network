@@ -4,11 +4,7 @@ resource "aws_s3_bucket" "bucket" {
   count = var.vpc_flow_log_bucket_name != "" ? 1 : 0
 
   bucket = var.vpc_flow_log_bucket_name
-  tags = {
-    "Name"     = var.vpc_flow_log_bucket_name,
-    "role"     = "storage"
-    "creation" = "terraform"
-  }
+  tags   = merge({ Name = var.vpc_flow_log_bucket_name }, var.vpc_flow_logs_storage_tags)
 }
 
 data "aws_iam_policy_document" "s3_bucket_policy_doc" {
@@ -114,6 +110,8 @@ resource "aws_flow_log" "flow_log_s3" {
   traffic_type         = var.vpc_flow_log_traffic_type
   vpc_id               = aws_vpc.main.id
   log_format           = var.vpc_flow_log_custom_format != "" ? var.vpc_flow_log_custom_format : null
+  tags                 = var.vpc_flow_logs_tags
+
   destination_options {
     file_format        = "parquet"
     per_hour_partition = true
@@ -128,11 +126,7 @@ resource "aws_cloudwatch_log_group" "cw_log" {
   name              = var.vpc_flow_log_cw_log_group_name
   retention_in_days = var.vpc_flow_log_retention_period
   kms_key_id        = var.vpc_flow_log_kms_key_arn != "" ? var.vpc_flow_log_kms_key_arn : null
-  tags = {
-    "Name"     = var.vpc_flow_log_cw_log_group_name,
-    "role"     = "storage"
-    "creation" = "terraform"
-  }
+  tags              = merge({ Name = var.vpc_flow_log_cw_log_group_name }, var.vpc_flow_logs_storage_tags)
 }
 
 data "aws_iam_policy_document" "assume_role" {
@@ -210,4 +204,5 @@ resource "aws_flow_log" "flow_log_cw" {
   traffic_type         = var.vpc_flow_log_traffic_type
   vpc_id               = aws_vpc.main.id
   log_format           = var.vpc_flow_log_custom_format != "" ? var.vpc_flow_log_custom_format : null
+  tags                 = var.vpc_flow_logs_tags
 }

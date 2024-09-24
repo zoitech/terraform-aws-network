@@ -531,3 +531,15 @@ variable "vpc_flow_log_kms_key_arn" {
   type        = string
   default     = ""
 }
+
+variable "vpc_flow_logs_tags" {
+  description = "Tags to add to the VPC flow logs"
+  type        = map(string)
+  default     = {}
+}
+
+variable "vpc_flow_logs_storage_tags" {
+  description = "Tags to add to S3 bucket and/or CW log group deployed for the VPC flow logs"
+  type        = map(string)
+  default     = {}
+}
