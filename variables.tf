@@ -543,3 +543,9 @@ variable "vpc_flow_logs_storage_tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "enable_network_module" {
+  description = "Enable or disable this network module"
+  type        = bool
+  default     = true
+}

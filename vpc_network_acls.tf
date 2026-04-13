@@ -1,7 +1,7 @@
 # acl for entire vpc
 resource "aws_network_acl" "vpc_acl" {
   count      = local.create_network_acl
-  vpc_id     = aws_vpc.main.id
+  vpc_id     = aws_vpc.main[0].id
   subnet_ids = flatten([aws_subnet.sn_private_a[*].id, aws_subnet.sn_private_b[*].id, aws_subnet.sn_private_c[*].id, aws_subnet.sn_public_a[*].id, aws_subnet.sn_public_b[*].id, aws_subnet.sn_public_c[*].id])
   tags = {
     Name = var.network_acl_tag_name
@@ -48,7 +48,7 @@ resource "aws_network_acl_rule" "acl_rule_deny" {
 # acl for private subnets only
 resource "aws_network_acl" "private_subnets_acl" {
   count      = local.create_private_subnet_acl
-  vpc_id     = aws_vpc.main.id
+  vpc_id     = aws_vpc.main[0].id
   subnet_ids = flatten([aws_subnet.sn_private_a[*].id, aws_subnet.sn_private_b[*].id, aws_subnet.sn_private_c[*].id])
 
   tags = {
@@ -74,7 +74,7 @@ resource "aws_network_acl_rule" "private_subnet_acl_rules" {
 # acl for public subnets only
 resource "aws_network_acl" "public_subnets_acl" {
   count      = local.create_public_subnet_acl
-  vpc_id     = aws_vpc.main.id
+  vpc_id     = aws_vpc.main[0].id
   subnet_ids = flatten([aws_subnet.sn_public_a[*].id, aws_subnet.sn_public_b[*].id, aws_subnet.sn_public_c[*].id])
 
   tags = {

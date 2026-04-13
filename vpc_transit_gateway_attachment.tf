@@ -8,7 +8,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "network_transit_gateway" {
   # subnet_ids         = flatten([aws_subnet.sn_private_a[*].id, aws_subnet.sn_private_b[*].id, aws_subnet.sn_private_c[*].id])
   subnet_ids         = local.subnet_ids
   transit_gateway_id = var.transit_gateway_id
-  vpc_id             = aws_vpc.main.id
+  vpc_id             = aws_vpc.main[0].id
 
   tags = {
     Name = var.tgw_attachment_tag_name
@@ -24,7 +24,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "network_transit_gateway_witho
   # subnet_ids        = flatten([aws_subnet.sn_private_a[*].id, aws_subnet.sn_private_b[*].id, aws_subnet.sn_private_c[*].id])
   subnet_ids         = local.subnet_ids
   transit_gateway_id = var.transit_gateway_id
-  vpc_id             = aws_vpc.main.id
+  vpc_id             = aws_vpc.main[0].id
 
   tags = {
     Name = var.tgw_attachment_tag_name

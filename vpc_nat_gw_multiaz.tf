@@ -1,6 +1,6 @@
 # Muti-AZ NAT GW
 resource "aws_eip" "natgw_eip_multiaz" {
-  for_each = toset(var.nat_gw_azs)
+  for_each = var.enable_network_module ? toset(var.nat_gw_azs) : toset([])
   tags     = { "Name" = "EIP NAT Gateway ${each.key}" }
 
   lifecycle {
@@ -24,9 +24,9 @@ resource "aws_nat_gateway" "natgw_multiaz" {
 
 # Multi-AZ NATGW RT's
 resource "aws_route_table" "rt_private_multiaz" {
-  for_each = toset(var.nat_gw_azs)
+  for_each = var.enable_network_module ? toset(var.nat_gw_azs) : toset([])
 
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.main[0].id
 
   tags = merge(local.rt_private_tags, { "Name" = upper("Private Route ${each.key}") })
 
