@@ -1,15 +1,15 @@
 locals {
   create_network_resources = var.enable_network_module == true ? 1 : 0
-  vpc_name    = var.vpc_name
-  create_dhcp = (var.enable_network_module && var.create_dhcp ? 1 : 0)
-  create_igw  = (var.enable_network_module && var.create_igw && local.public_subnet_defined ? 1 : 0)
-  create_nat  = (var.enable_network_module && var.create_nat && var.create_igw && local.public_subnet_defined ? 1 : 0)
+  vpc_name                 = var.vpc_name
+  create_dhcp              = (var.enable_network_module && var.create_dhcp ? 1 : 0)
+  create_igw               = (var.enable_network_module && var.create_igw && local.public_subnet_defined ? 1 : 0)
+  create_nat               = (var.enable_network_module && var.create_nat && var.create_igw && local.public_subnet_defined ? 1 : 0)
 
   # If creating dynamic subnets, check if any public subnets have been defined.
   public_subnet_defined = (local.enable_dynamic_subnets == false ? true : (length(var.public_subnets_a) > 0 || length(var.public_subnets_b) > 0 || length(var.public_subnets_c) > 0 ? true : false))
 
   # Public Subnet to be attached to the NAT Gateway
-  vpc_nat_gateway_subnet_id = (local.enable_dynamic_subnets == true ? (local.sn_public_a > 0 ? aws_subnet.sn_public_a.0.id : (local.sn_public_b > 0 ? aws_subnet.sn_public_b.0.id : (local.sn_public_c > 0 ? aws_subnet.sn_public_c.0.id : null))) : aws_subnet.sn_public_a.0.id)
+  vpc_nat_gateway_subnet_id = (local.enable_dynamic_subnets == true ? (local.sn_public_a > 0 ? one(aws_subnet.sn_public_a[*].id) : (local.sn_public_b > 0 ? one(aws_subnet.sn_public_b[*].id) : (local.sn_public_c > 0 ? one(aws_subnet.sn_public_c[*].id) : null))) : one(aws_subnet.sn_public_a[*].id))
 
   # acl for entire VPC
   create_network_acl       = (var.enable_network_module && var.create_network_acl ? 1 : 0)
