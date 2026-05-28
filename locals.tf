@@ -13,7 +13,7 @@ locals {
 
   # acl for entire VPC
   create_network_acl       = (var.enable_network_module && var.create_network_acl ? 1 : 0)
-  create_network_acl_rules = (local.create_network_acl == true && var.network_acl_rules != null ? length(var.network_acl_rules) : 0)
+  create_network_acl_rules = (local.create_network_acl == 1 && var.network_acl_rules != null ? length(var.network_acl_rules) : 0)
 
   # acl for private subnets
   create_private_subnet_acl       = (var.enable_network_module && var.create_private_subnet_acl == true ? 1 : 0)
