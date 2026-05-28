@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "s3_bucket_policy_doc" {
     condition {
       test     = "StringEquals"
       variable = "aws:SourceAccount"
-      values   = [data.aws_caller_identity.current.account_id]
+      values   = [data.aws_caller_identity.current[0].account_id]
     }
 
     condition {
@@ -36,7 +36,7 @@ data "aws_iam_policy_document" "s3_bucket_policy_doc" {
     condition {
       test     = "ArnLike"
       variable = "aws:SourceArn"
-      values   = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:*"]
+      values   = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current[0].account_id}:*"]
     }
   }
 
@@ -57,13 +57,13 @@ data "aws_iam_policy_document" "s3_bucket_policy_doc" {
     condition {
       test     = "StringEquals"
       variable = "aws:SourceAccount"
-      values   = [data.aws_caller_identity.current.account_id]
+      values   = [data.aws_caller_identity.current[0].account_id]
     }
 
     condition {
       test     = "ArnLike"
       variable = "aws:SourceArn"
-      values   = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:*"]
+      values   = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current[0].account_id}:*"]
     }
   }
 }
