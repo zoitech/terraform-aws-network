@@ -1,5 +1,5 @@
 output "vpc_id" {
-  value = aws_vpc.main.id
+  value = local.create_network_resources == 1 ? aws_vpc.main[0].id : null
 }
 
 output "sn_public_a_ids" {
@@ -33,12 +33,12 @@ output "sn_private_c_ids" {
 }
 
 output "rt_public_id" {
-  value       = aws_route_table.rt_public.id
+  value       = local.create_network_resources == 1 ? aws_route_table.rt_public[0].id : null
   description = "The ID of the public route table."
 }
 
 output "rt_private_id" {
-  value       = aws_route_table.rt_private.id
+  value       = local.create_network_resources == 1 ? aws_route_table.rt_private[0].id : null
   description = "The ID of the private route table."
 }
 

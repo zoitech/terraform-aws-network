@@ -1,3 +1,10 @@
+## 2.7.0
+ENHANCEMENTS:
+* Add toggle variable `enable_network_module` to optionally disable creation of all network resources. Default value is `true` to maintain backward compatibility
+
+FIX:
+* Refactor route table association counts to use subnet resource lengths for dynamic subnet deployments
+
 ## 2.6.1
 ENHANCEMENTS:
 * Add variables to tag VPC flow log resources

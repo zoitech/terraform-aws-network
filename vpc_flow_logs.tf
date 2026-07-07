@@ -1,14 +1,14 @@
 ###### VPC flow logs for S3 ######
 
 resource "aws_s3_bucket" "bucket" {
-  count = var.vpc_flow_log_bucket_name != "" ? 1 : 0
+  count = var.enable_network_module && var.vpc_flow_log_bucket_name != "" ? 1 : 0
 
   bucket = var.vpc_flow_log_bucket_name
   tags   = merge({ Name = var.vpc_flow_log_bucket_name }, var.vpc_flow_logs_storage_tags)
 }
 
 data "aws_iam_policy_document" "s3_bucket_policy_doc" {
-  count = var.vpc_flow_log_bucket_name != "" ? 1 : 0
+  count = var.enable_network_module && var.vpc_flow_log_bucket_name != "" ? 1 : 0
 
   statement {
     sid = "AWSLogDeliveryWrite"
@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "s3_bucket_policy_doc" {
     condition {
       test     = "StringEquals"
       variable = "aws:SourceAccount"
-      values   = [data.aws_caller_identity.current.account_id]
+      values   = [data.aws_caller_identity.current[0].account_id]
     }
 
     condition {
@@ -36,7 +36,7 @@ data "aws_iam_policy_document" "s3_bucket_policy_doc" {
     condition {
       test     = "ArnLike"
       variable = "aws:SourceArn"
-      values   = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:*"]
+      values   = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current[0].account_id}:*"]
     }
   }
 
@@ -57,26 +57,26 @@ data "aws_iam_policy_document" "s3_bucket_policy_doc" {
     condition {
       test     = "StringEquals"
       variable = "aws:SourceAccount"
-      values   = [data.aws_caller_identity.current.account_id]
+      values   = [data.aws_caller_identity.current[0].account_id]
     }
 
     condition {
       test     = "ArnLike"
       variable = "aws:SourceArn"
-      values   = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:*"]
+      values   = ["arn:aws:logs:${var.region}:${data.aws_caller_identity.current[0].account_id}:*"]
     }
   }
 }
 
 resource "aws_s3_bucket_policy" "bucket_policy" {
-  count = var.vpc_flow_log_bucket_name != "" ? 1 : 0
+  count = var.enable_network_module && var.vpc_flow_log_bucket_name != "" ? 1 : 0
 
   bucket = aws_s3_bucket.bucket[0].id
   policy = data.aws_iam_policy_document.s3_bucket_policy_doc[0].json
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "bucket_expiration_rule" {
-  count = var.vpc_flow_log_bucket_name != "" ? 1 : 0
+  count = var.enable_network_module && var.vpc_flow_log_bucket_name != "" ? 1 : 0
 
   bucket = aws_s3_bucket.bucket[0].id
   rule {
@@ -90,7 +90,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket_expiration_rule" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_encryption" {
-  count = var.vpc_flow_log_bucket_name != "" && var.vpc_flow_log_kms_key_arn != "" ? 1 : 0
+  count = var.enable_network_module && var.vpc_flow_log_bucket_name != "" && var.vpc_flow_log_kms_key_arn != "" ? 1 : 0
 
   bucket = aws_s3_bucket.bucket[0].id
   rule {
@@ -103,12 +103,12 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_encryption
 }
 
 resource "aws_flow_log" "flow_log_s3" {
-  count = var.vpc_flow_log_bucket_name != "" ? 1 : 0
+  count = var.enable_network_module && var.vpc_flow_log_bucket_name != "" ? 1 : 0
 
   log_destination      = aws_s3_bucket.bucket[0].arn
   log_destination_type = "s3"
   traffic_type         = var.vpc_flow_log_traffic_type
-  vpc_id               = aws_vpc.main.id
+  vpc_id               = aws_vpc.main[0].id
   log_format           = var.vpc_flow_log_custom_format != "" ? var.vpc_flow_log_custom_format : null
   tags                 = var.vpc_flow_logs_tags
 
@@ -121,7 +121,7 @@ resource "aws_flow_log" "flow_log_s3" {
 ###### VPC flow logs for Cloudwatch logs ######
 
 resource "aws_cloudwatch_log_group" "cw_log" {
-  count = var.vpc_flow_log_cw_log_group_name != "" ? 1 : 0
+  count = var.enable_network_module && var.vpc_flow_log_cw_log_group_name != "" ? 1 : 0
 
   name              = var.vpc_flow_log_cw_log_group_name
   retention_in_days = var.vpc_flow_log_retention_period
@@ -130,7 +130,7 @@ resource "aws_cloudwatch_log_group" "cw_log" {
 }
 
 data "aws_iam_policy_document" "assume_role" {
-  count = var.vpc_flow_log_cw_log_group_name != "" ? 1 : 0
+  count = var.enable_network_module && var.vpc_flow_log_cw_log_group_name != "" ? 1 : 0
 
   statement {
     effect = "Allow"
@@ -145,14 +145,14 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role" "cw_log_role" {
-  count = var.vpc_flow_log_cw_log_group_name != "" ? 1 : 0
+  count = var.enable_network_module && var.vpc_flow_log_cw_log_group_name != "" ? 1 : 0
 
   name               = "zoi-vpc-flow-logs-role"
   assume_role_policy = data.aws_iam_policy_document.assume_role[0].json
 }
 
 data "aws_iam_policy_document" "cw_policy_doc" {
-  count = var.vpc_flow_log_cw_log_group_name != "" ? 1 : 0
+  count = var.enable_network_module && var.vpc_flow_log_cw_log_group_name != "" ? 1 : 0
 
   statement {
     effect = "Allow"
@@ -188,7 +188,7 @@ data "aws_iam_policy_document" "cw_policy_doc" {
 }
 
 resource "aws_iam_role_policy" "cw_policy" {
-  count = var.vpc_flow_log_cw_log_group_name != "" ? 1 : 0
+  count = var.enable_network_module && var.vpc_flow_log_cw_log_group_name != "" ? 1 : 0
 
   name   = "vpc-cw-log-policy"
   role   = aws_iam_role.cw_log_role[0].id
@@ -196,13 +196,13 @@ resource "aws_iam_role_policy" "cw_policy" {
 }
 
 resource "aws_flow_log" "flow_log_cw" {
-  count = var.vpc_flow_log_cw_log_group_name != "" ? 1 : 0
+  count = var.enable_network_module && var.vpc_flow_log_cw_log_group_name != "" ? 1 : 0
 
   log_destination      = aws_cloudwatch_log_group.cw_log[0].arn
   log_destination_type = "cloud-watch-logs"
   iam_role_arn         = aws_iam_role.cw_log_role[0].arn
   traffic_type         = var.vpc_flow_log_traffic_type
-  vpc_id               = aws_vpc.main.id
+  vpc_id               = aws_vpc.main[0].id
   log_format           = var.vpc_flow_log_custom_format != "" ? var.vpc_flow_log_custom_format : null
   tags                 = var.vpc_flow_logs_tags
 }

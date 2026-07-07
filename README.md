@@ -23,6 +23,27 @@ This module creates the following resources:
 
 ## Usage
 
+### Enable/disable the module
+
+The variable `enable_network_module` controls whether this module creates any network resources.
+
+* `enable_network_module = true` (default): module behaves normally and creates resources according to the other flags.
+* `enable_network_module = false`: all resources in this module are disabled.
+
+When disabled, outputs tied to counted resources return empty values (`null` or empty lists, depending on output type).
+
+```hcl
+module "network" {
+  source                = "git::https://github.com/zoitech/terraform-aws-network.git"
+  enable_network_module = false
+
+  # Existing inputs can remain, but no resources are created while disabled.
+  vpc_name    = "my-vpc"
+  vpc_network = "10.0.0.0/21"
+  region      = "eu-central-1"
+}
+```
+
 ### Subnets creation
 
 The default behavior is to create 3 public subnets and 3 private subnets, 1 per availability zone.

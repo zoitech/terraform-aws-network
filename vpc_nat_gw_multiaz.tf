@@ -1,6 +1,6 @@
 # Muti-AZ NAT GW
 resource "aws_eip" "natgw_eip_multiaz" {
-  for_each = toset(var.nat_gw_azs)
+  for_each = var.enable_network_module ? toset(var.nat_gw_azs) : toset([])
   tags     = { "Name" = "EIP NAT Gateway ${each.key}" }
 
   lifecycle {
@@ -24,9 +24,9 @@ resource "aws_nat_gateway" "natgw_multiaz" {
 
 # Multi-AZ NATGW RT's
 resource "aws_route_table" "rt_private_multiaz" {
-  for_each = toset(var.nat_gw_azs)
+  for_each = var.enable_network_module ? toset(var.nat_gw_azs) : toset([])
 
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.main[0].id
 
   tags = merge(local.rt_private_tags, { "Name" = upper("Private Route ${each.key}") })
 
@@ -75,19 +75,19 @@ resource "aws_vpc_endpoint_route_table_association" "rt_private_multiaz_s3_endpo
 }
 
 resource "aws_route_table_association" "rt_private_a_multiaz" {
-  count          = local.multiaz_a_required ? length(var.private_subnets_a) : 0
+  count          = local.multiaz_a_required ? length(aws_subnet.sn_private_a) : 0
   subnet_id      = aws_subnet.sn_private_a[count.index].id
   route_table_id = aws_route_table.rt_private_multiaz["a"].id
 }
 
 resource "aws_route_table_association" "rt_private_b_multiaz" {
-  count          = local.multiaz_b_required ? length(var.private_subnets_b) : 0
+  count          = local.multiaz_b_required ? length(aws_subnet.sn_private_b) : 0
   subnet_id      = aws_subnet.sn_private_b[count.index].id
   route_table_id = aws_route_table.rt_private_multiaz["b"].id
 }
 
 resource "aws_route_table_association" "rt_private_c_multiaz" {
-  count          = local.multiaz_c_required ? length(var.private_subnets_c) : 0
+  count          = local.multiaz_c_required ? length(aws_subnet.sn_private_c) : 0
   subnet_id      = aws_subnet.sn_private_c[count.index].id
   route_table_id = aws_route_table.rt_private_multiaz["c"].id
 }
