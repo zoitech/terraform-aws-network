@@ -1,3 +1,7 @@
+## 2.7.1
+FIX:
+* Fix `Invalid for_each argument` errors in Multi-AZ NAT Gateway resources by keying `for_each` on `nat_gw_azs` instead of apply-time resource attributes
+
 ## 2.7.0
 ENHANCEMENTS:
 * Add toggle variable `enable_network_module` to optionally disable creation of all network resources. Default value is `true` to maintain backward compatibility
