@@ -3,34 +3,40 @@
 variable "region" {
   default     = "eu-central-1"
   description = "The region to use for this module."
+  type = string
 }
 
 # vpc
 variable "vpc_name" {
   description = "The name of the VPC. Other names will result from this."
   default     = "my-vpc"
+  type = string
 }
 
 variable "vpc_network" {
   default = "10.0.0.0/24"
   # default     = ""
   description = "Network within which the Subnets will be created."
+  type = string
 }
 
 # subnets
 variable "sn_private_a_name" {
   description = "The name of the 1st Public Subnet which will be available in AZ-a."
   default     = "Private A"
+  type = string
 }
 
 variable "sn_private_b_name" {
   description = "The name of the 2nd Private Subnet which will be available in AZ-b."
   default     = "Private B"
+  type = string
 }
 
 variable "sn_private_c_name" {
   description = "The name of the 3rd Private Subnet which will be available in AZ-c."
   default     = "Private C"
+  type = string
 }
 
 // variable "sn_private_d_name" {
@@ -41,16 +47,19 @@ variable "sn_private_c_name" {
 variable "sn_public_a_name" {
   description = "The name of the 1st Public Subnet which will be available in AZ-a."
   default     = "Public A"
+  type = string
 }
 
 variable "sn_public_b_name" {
   description = "The name of the 2nd Public Subnet which will be available in AZ-b."
   default     = "Public B"
+  type = string
 }
 
 variable "sn_public_c_name" {
   description = "The name of the 3rd Public Subnet which will be available in AZ-c."
   default     = "Public C"
+  type = string
 }
 
 // variable "sn_public_d_name" {
@@ -62,27 +71,33 @@ variable "sn_public_c_name" {
 variable "enable_dns_hostnames" {
   default     = true
   description = " (Optional) A boolean flag to enable/disable DNS hostnames in the VPC"
+  type = bool
 }
 variable "create_igw" {
   description = "Create Internet GW for public subnets if set to true"
   default     = false
+  type = bool
 }
 
 variable "create_nat" {
   description = "Create NAT GW for private subnets if set to true"
   default     = false
+  type = bool
 }
 
 # DHCP
 variable "create_dhcp" {
   default = false
+  type = bool
 }
 variable "vpc_dhcp_options_tag_name" {
   default = "tf-dopt"
+  type = string
 }
 
 variable "dhcp_domain_name" {
   default = ""
+  type = string
 }
 
 variable "domain_name_servers" {
@@ -103,16 +118,19 @@ variable "netbios_name_servers" {
 
 variable "netbios_node_type" {
   default = ""
+  type = string
 }
 
 # network acl
 ## entire vpc
 variable "create_network_acl" {
   default = false
+  type = bool
 }
 
 variable "network_acl_tag_name" {
   default = "tf-vpc-network"
+  type = string
 }
 
 variable "network_acl_rules" {
@@ -132,10 +150,12 @@ variable "network_acl_rules" {
 ## private subnets only
 variable "create_private_subnet_acl" {
   default = false
+  type = bool
 }
 
 variable "private_subnet_tag_name" {
   default = "tf-vpc-network-private"
+  type = string
 }
 
 variable "private_subnet_acl_rules" {
@@ -155,10 +175,12 @@ variable "private_subnet_acl_rules" {
 ## public subnets only
 variable "create_public_subnet_acl" {
   default = false
+  type = bool
 }
 
 variable "public_subnet_tag_name" {
   default = "tf-vpc-network-public"
+  type = string
 }
 
 variable "public_subnet_acl_rules" {
@@ -179,42 +201,52 @@ variable "public_subnet_acl_rules" {
 variable "accept_resource_share" {
   description = "Does the resource access manager resource share containaing the transit gateway need to be accepted?"
   default     = false
+  type = bool
 }
 
 variable "share_arn" {
   description = "The resource access manager share ARN which contains the transit gateway resource"
   default     = ""
+  type = string
 }
 
 variable "create_tgw_attachment" {
+  description = "Whether to create a transit gateway attachment"
+  type = bool
   default = false
 }
 
 variable "tgw_attachment_aza_subnet" {
   description = "The private subnet in the availability zone A to be attached to the Transit Gateway"
   default     = -1
+  type = number
 }
 
 variable "tgw_attachment_azb_subnet" {
   description = "The private subnet in the availability zone B to be attached to the Transit Gateway"
   default     = -1
+  type = number
 }
 
 variable "tgw_attachment_azc_subnet" {
   description = "The private subnet in the availability zone C to be attached to the Transit Gateway"
   default     = -1
+  type = number
 }
 
 variable "create_tgw_attachment_without_ram" {
   default = false
+  type = bool
 }
 
 variable "transit_gateway_id" {
   default = ""
+  type = string
 }
 
 variable "tgw_attachment_tag_name" {
   default = "my-company-network"
+  type = string
 }
 
 variable "tgw_destination_cidr_blocks" {
@@ -260,7 +292,7 @@ variable "public_subnets_c" {
   default     = []
 }
 
-# Availability Zones 
+# Availability Zones
 
 variable "az1" {
   description = "Availabilty zone for Subnet A"
@@ -351,6 +383,7 @@ variable "rt_public_tags" {
 
 variable "create_vpcep_s3" {
   description = "Create VPC endpoint for S3 if set to true"
+  type        = bool
   default     = false
 }
 
@@ -363,10 +396,12 @@ variable "vpcep_s3_tags" {
 variable "vpcep_s3_name" {
   description = "The name of the S3 endpoint."
   default     = "S3 access"
+  type        = string
 }
 
 variable "create_vpcep_dynamodb" {
   description = "Create VPC endpoint for DynamoDB if set to true"
+  type        = bool
   default     = false
 }
 
@@ -378,6 +413,7 @@ variable "vpcep_dynamodb_tags" {
 
 variable "vpcep_dynamodb_name" {
   description = "The name of the DynamoDB endpoint."
+  type        = string
   default     = "DynamoDB access"
 }
 
@@ -436,29 +472,35 @@ variable "additional_public_subnets_c" {
 }
 variable "additional_sn_private_a_name" {
   description = "The name of the 1st Public Subnet which will be available in AZ-a."
+  type        = string
   default     = "Private A"
 }
 variable "additional_sn_private_b_name" {
   description = "The name of the 1st Public Subnet which will be available in AZ-a."
+  type        = string
   default     = "Private B"
 }
 variable "additional_sn_private_c_name" {
   description = "The name of the 1st Public Subnet which will be available in AZ-a."
+  type        = string
   default     = "Private C"
 }
 
 variable "additional_sn_public_a_name" {
   description = "The name of the 1st Public Subnet which will be available in AZ-a."
+  type        = string
   default     = "Public A"
 }
 
 variable "additional_sn_public_b_name" {
   description = "The name of the 2nd Public Subnet which will be available in AZ-b."
+  type        = string
   default     = "Public B"
 }
 
 variable "additional_sn_public_c_name" {
   description = "The name of the 3rd Public Subnet which will be available in AZ-c."
+  type        = string
   default     = "Public C"
 }
 variable "additional_sn_private_a_tags" {

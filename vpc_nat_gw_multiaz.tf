@@ -1,6 +1,6 @@
 # Muti-AZ NAT GW
 resource "aws_eip" "natgw_eip_multiaz" {
-  for_each = var.enable_network_module ? toset(var.nat_gw_azs) : toset([])
+  for_each = local.create_nat_gw_azs
   tags     = { "Name" = "EIP NAT Gateway ${each.key}" }
 
   lifecycle {
@@ -9,7 +9,7 @@ resource "aws_eip" "natgw_eip_multiaz" {
 }
 
 resource "aws_nat_gateway" "natgw_multiaz" {
-  for_each = var.enable_network_module ? toset(var.nat_gw_azs) : toset([])
+  for_each = local.create_nat_gw_azs
 
   allocation_id = aws_eip.natgw_eip_multiaz[each.key].id
   subnet_id     = local.nat_gw_multi_az_public_subnets[each.key]
@@ -24,7 +24,7 @@ resource "aws_nat_gateway" "natgw_multiaz" {
 
 # Multi-AZ NATGW RT's
 resource "aws_route_table" "rt_private_multiaz" {
-  for_each = var.enable_network_module ? toset(var.nat_gw_azs) : toset([])
+  for_each = local.create_nat_gw_azs
 
   vpc_id = aws_vpc.main[0].id
 
@@ -36,7 +36,7 @@ resource "aws_route_table" "rt_private_multiaz" {
 }
 
 resource "aws_route" "rt_private_multiaz_ngw_route" {
-  for_each = var.enable_network_module ? toset(var.nat_gw_azs) : toset([])
+  for_each = local.create_nat_gw_azs
 
   route_table_id         = aws_route_table.rt_private_multiaz[each.key].id
   destination_cidr_block = "0.0.0.0/0"
