@@ -44,7 +44,7 @@ resource "aws_route" "rt_private_multiaz_ngw_route" {
 }
 
 resource "aws_route" "rt_private_multiaz_tgw_route_1" {
-  for_each = var.enable_network_module && var.create_tgw_attachment ? toset(var.nat_gw_azs) : toset([])
+  for_each = { for rt, values in aws_route_table.rt_private_multiaz : rt => values if var.create_tgw_attachment }
 
   route_table_id         = aws_route_table.rt_private_multiaz[each.key].id
   destination_cidr_block = "10.0.0.0/8"
@@ -52,7 +52,7 @@ resource "aws_route" "rt_private_multiaz_tgw_route_1" {
 }
 
 resource "aws_route" "rt_private_multiaz_tgw_route_2" {
-  for_each = var.enable_network_module && var.create_tgw_attachment ? toset(var.nat_gw_azs) : toset([])
+  for_each = { for rt, values in aws_route_table.rt_private_multiaz : rt => values if var.create_tgw_attachment }
 
   route_table_id         = aws_route_table.rt_private_multiaz[each.key].id
   destination_cidr_block = "172.16.0.0/12"
@@ -60,7 +60,7 @@ resource "aws_route" "rt_private_multiaz_tgw_route_2" {
 }
 
 resource "aws_route" "rt_private_multiaz_tgw_route_3" {
-  for_each = var.enable_network_module && var.create_tgw_attachment ? toset(var.nat_gw_azs) : toset([])
+  for_each = { for rt, values in aws_route_table.rt_private_multiaz : rt => values if var.create_tgw_attachment }
 
   route_table_id         = aws_route_table.rt_private_multiaz[each.key].id
   destination_cidr_block = "192.168.0.0/16"
@@ -68,7 +68,7 @@ resource "aws_route" "rt_private_multiaz_tgw_route_3" {
 }
 
 resource "aws_vpc_endpoint_route_table_association" "rt_private_multiaz_s3_endpoint" {
-  for_each = var.enable_network_module && var.create_vpcep_s3 ? toset(var.nat_gw_azs) : toset([])
+  for_each = { for rt, values in aws_route_table.rt_private_multiaz : rt => values if var.create_vpcep_s3 }
 
   vpc_endpoint_id = aws_vpc_endpoint.s3[0].id
   route_table_id  = aws_route_table.rt_private_multiaz[each.key].id
