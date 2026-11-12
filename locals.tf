@@ -4,6 +4,7 @@ locals {
   create_dhcp              = (var.enable_network_module && var.create_dhcp ? 1 : 0)
   create_igw               = (var.enable_network_module && var.create_igw && local.public_subnet_defined ? 1 : 0)
   create_nat               = (var.enable_network_module && var.create_nat && var.create_igw && local.public_subnet_defined ? 1 : 0)
+  create_nat_gw_azs = var.enable_network_module ? toset(var.nat_gw_azs) : toset([])
 
   # If creating dynamic subnets, check if any public subnets have been defined.
   public_subnet_defined = (local.enable_dynamic_subnets == false ? true : (length(var.public_subnets_a) > 0 || length(var.public_subnets_b) > 0 || length(var.public_subnets_c) > 0 ? true : false))
@@ -39,7 +40,7 @@ locals {
   sn_private_b = (var.enable_network_module == false ? 0 : (local.enable_dynamic_subnets == false ? 1 : (length(var.private_subnets_b) > 0 ? length(var.private_subnets_b) : 0)))
   sn_private_c = (var.enable_network_module == false ? 0 : (local.enable_dynamic_subnets == false ? 1 : (length(var.private_subnets_c) > 0 ? length(var.private_subnets_c) : 0)))
 
-  # Public: 
+  # Public:
   sn_public_a = (var.enable_network_module == false ? 0 : (local.enable_dynamic_subnets == false ? 1 : (length(var.public_subnets_a) > 0 ? length(var.public_subnets_a) : 0)))
   sn_public_b = (var.enable_network_module == false ? 0 : (local.enable_dynamic_subnets == false ? 1 : (length(var.public_subnets_b) > 0 ? length(var.public_subnets_b) : 0)))
   sn_public_c = (var.enable_network_module == false ? 0 : (local.enable_dynamic_subnets == false ? 1 : (length(var.public_subnets_c) > 0 ? length(var.public_subnets_c) : 0)))

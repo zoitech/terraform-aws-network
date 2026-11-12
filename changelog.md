@@ -1,3 +1,13 @@
+## 2.7.1
+FIX:
+* Fix `Invalid for_each argument` errors in Multi-AZ NAT Gateway resources by keying `for_each` on `nat_gw_azs` instead of apply-time resource attributes ([#66](https://github.com/zoitech/terraform-aws-network/issues/66))
+  * `aws_nat_gateway.natgw_multiaz`
+  * `aws_route.rt_private_multiaz_ngw_route`
+  * `aws_route.rt_private_multiaz_tgw_route_1`
+  * `aws_route.rt_private_multiaz_tgw_route_2`
+  * `aws_route.rt_private_multiaz_tgw_route_3`
+  * `aws_vpc_endpoint_route_table_association.rt_private_multiaz_s3_endpoint`
+
 ## 2.7.0
 ENHANCEMENTS:
 * Add toggle variable `enable_network_module` to optionally disable creation of all network resources. Default value is `true` to maintain backward compatibility
